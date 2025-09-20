@@ -1,0 +1,21 @@
+{
+  "short_name": "Componentes Web",
+  "name": "Componentes Essenciais da Web",
+  "description": "Uma coleção curada dos blocos de construção fundamentais para interfaces web modernas.",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#14b8a6",
+  "background_color": "#f1f5f9"
+}
