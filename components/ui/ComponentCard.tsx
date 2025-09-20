@@ -31,7 +31,7 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
       <div className="p-6">
         <h3 className="text-xl font-bold text-slate-900 mb-2">{name}</h3>
         <p className="text-slate-600 mb-4 text-sm leading-relaxed">{description}</p>
-        <div className="bg-slate-100 rounded-lg p-6 min-h-[100px] flex justify-center items-center">
+        <div className="bg-slate-100 rounded-lg p-6 min-h-[150px] flex justify-center items-center">
           {children}
         </div>
       </div>
