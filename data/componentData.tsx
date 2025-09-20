@@ -671,12 +671,94 @@ const RangeSliderExample: React.FC = () => {
     );
 };
 
-const DatePickerExample: React.FC = () => (
+const DateTimePickerExample: React.FC = () => {
+  const [pickerType, setPickerType] = useState<'date' | 'time'>('date');
+  const [date, setDate] = useState('2024-07-26');
+  const [hour, setHour] = useState('09');
+  const [minute, setMinute] = useState('45');
+  const [period, setPeriod] = useState<'AM' | 'PM'>('PM');
+
+  return (
     <div className="w-full max-w-xs">
-        <label htmlFor="event-date" className="block text-sm font-medium text-slate-700 mb-1">Data do Evento</label>
-        <input type="date" name="event-date" id="event-date" className="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border-slate-300 rounded-md" defaultValue="2024-07-26" />
+      <label className="block text-sm font-medium text-slate-700 mb-2">Data e Hora do Evento</label>
+      
+      <div className="flex w-full p-1 bg-slate-200 rounded-lg mb-3">
+        <button 
+          onClick={() => setPickerType('date')}
+          className={`w-1/2 rounded-md py-1 text-sm font-semibold transition-all duration-200 ${
+            pickerType === 'date' ? 'bg-white shadow-sm text-teal-600 ring-1 ring-black/5' : 'text-slate-600 hover:bg-slate-300/70'
+          }`}
+          aria-pressed={pickerType === 'date'}
+        >
+          Data
+        </button>
+        <button 
+          onClick={() => setPickerType('time')}
+          className={`w-1/2 rounded-md py-1 text-sm font-semibold transition-all duration-200 ${
+            pickerType === 'time' ? 'bg-white shadow-sm text-teal-600 ring-1 ring-black/5' : 'text-slate-600 hover:bg-slate-300/70'
+          }`}
+          aria-pressed={pickerType === 'time'}
+        >
+          Hora
+        </button>
+      </div>
+      
+      {pickerType === 'date' ? (
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <svg className="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <input 
+            type="date" 
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="block w-full rounded-md border border-slate-300 pr-10 py-2 shadow-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+          />
+        </div>
+      ) : (
+        <div className="flex items-center gap-2">
+            <input 
+                type="text" 
+                value={hour}
+                onChange={(e) => setHour(e.target.value)}
+                className="w-1/3 text-center rounded-md border border-slate-300 py-2 shadow-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-lg font-mono"
+                placeholder="HH"
+                maxLength={2}
+                aria-label="Hora"
+            />
+            <span className="font-bold text-slate-400 pb-1">:</span>
+            <input 
+                type="text" 
+                value={minute}
+                onChange={(e) => setMinute(e.target.value)}
+                className="w-1/3 text-center rounded-md border border-slate-300 py-2 shadow-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-lg font-mono"
+                placeholder="MM"
+                maxLength={2}
+                aria-label="Minuto"
+            />
+            <div className="flex-1 flex flex-col items-stretch bg-slate-200 rounded-md overflow-hidden">
+                <button 
+                    onClick={() => setPeriod('AM')}
+                    className={`p-1 text-xs font-semibold transition-colors ${
+                        period === 'AM' ? 'bg-teal-500 text-white' : 'text-slate-600 hover:bg-slate-300'
+                    }`}
+                    aria-pressed={period === 'AM'}
+                >AM</button>
+                <button 
+                    onClick={() => setPeriod('PM')}
+                    className={`p-1 text-xs font-semibold transition-colors ${
+                        period === 'PM' ? 'bg-teal-500 text-white' : 'text-slate-600 hover:bg-slate-300'
+                    }`}
+                    aria-pressed={period === 'PM'}
+                >PM</button>
+            </div>
+        </div>
+      )}
     </div>
-);
+  );
+};
 
 const FileUploadExample: React.FC = () => (
     <div className="w-full max-w-xs">
@@ -1882,13 +1964,45 @@ const [value, setValue] = useState(50);
       },
       {
         name: "Date / Time Picker",
-        description: "Um campo de entrada que abre uma interface de calendário ou relógio para selecionar datas e/ou horários.",
-        component: <DatePickerExample />,
+        description: "Um seletor que permite ao usuário escolher uma data a partir de um calendário e um horário com campos dedicados, incluindo um seletor AM/PM.",
+        component: <DateTimePickerExample />,
         code: `
-<div>
-  <label htmlFor="event-date">Data do Evento</label>
-  <input type="date" id="event-date" />
-</div>`
+const DateTimePicker = () => {
+  const [pickerType, setPickerType] = useState('date');
+  const [date, setDate] = useState('2024-07-26');
+  const [hour, setHour] = useState('09');
+  const [minute, setMinute] = useState('45');
+  const [period, setPeriod] = useState('PM');
+
+  return (
+    <div className="w-full max-w-xs space-y-3">
+      <label>Data e Hora do Evento</label>
+      
+      {/* Toggle para alternar entre Data e Hora */}
+      <div className="flex bg-slate-200 rounded-lg">
+        <button onClick={() => setPickerType('date')} className={pickerType === 'date' ? 'active' : ''}>Data</button>
+        <button onClick={() => setPickerType('time')} className={pickerType === 'time' ? 'active' : ''}>Hora</button>
+      </div>
+      
+      {pickerType === 'date' ? (
+        <div className="relative">
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          {/* Ícone de calendário */}
+        </div>
+      ) : (
+        <div className="flex items-center gap-2">
+            <input type="text" value={hour} onChange={(e) => setHour(e.target.value)} placeholder="HH" />
+            <span>:</span>
+            <input type="text" value={minute} onChange={(e) => setMinute(e.target.value)} placeholder="MM" />
+            <div>
+                <button onClick={() => setPeriod('AM')} className={period === 'AM' ? 'active' : ''}>AM</button>
+                <button onClick={() => setPeriod('PM')} className={period === 'PM' ? 'active' : ''}>PM</button>
+            </div>
+        </div>
+      )}
+    </div>
+  );
+};`
       },
       {
         name: "File Upload / Drag & Drop",
