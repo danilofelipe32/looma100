@@ -332,15 +332,15 @@ const PopoverExample: React.FC = () => {
   );
 };
 
+const sliderSlides = ['Slide 1', 'Slide 2', 'Slide 3'];
 const SliderExample: React.FC = () => {
   const [current, setCurrent] = useState(0);
-  const slides = ['Slide 1', 'Slide 2', 'Slide 3'];
-  const next = () => setCurrent((c) => (c === slides.length - 1 ? 0 : c + 1));
-  const prev = () => setCurrent((c) => (c === 0 ? slides.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === sliderSlides.length - 1 ? 0 : c + 1));
+  const prev = () => setCurrent((c) => (c === 0 ? sliderSlides.length - 1 : c - 1));
   return (
     <div className="relative w-full max-w-sm h-32 rounded-lg bg-slate-200 overflow-hidden shadow-inner">
       <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${current * 100}%)` }}>
-        {slides.map((s) => (
+        {sliderSlides.map((s) => (
           <div key={s} className="w-full h-32 flex-shrink-0 flex items-center justify-center text-xl font-bold text-slate-700">{s}</div>
         ))}
       </div>
@@ -350,25 +350,26 @@ const SliderExample: React.FC = () => {
   );
 };
 
+const galleryImages = [
+  'https://placehold.co/150x150/14b8a6/ffffff?text=Img+1',
+  'https://placehold.co/150x150/3b82f6/ffffff?text=Img+2',
+  'https://placehold.co/150x150/16a34a/ffffff?text=Img+3',
+];
 const GalleryExample: React.FC = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [image, setImage] = useState(0);
-  const images = [
-    'https://placehold.co/150x150/14b8a6/ffffff?text=Img+1',
-    'https://placehold.co/150x150/3b82f6/ffffff?text=Img+2',
-    'https://placehold.co/150x150/16a34a/ffffff?text=Img+3',
-  ];
+  
   const openLightbox = (index: number) => { setImage(index); setLightboxOpen(true); };
   return (
     <>
       <div className="flex space-x-2">
-        {images.map((src, i) => (
+        {galleryImages.map((src, i) => (
           <img key={src} src={src} alt={`Thumbnail ${i+1}`} className="w-16 h-16 rounded-md cursor-pointer hover:opacity-75 transition-opacity" onClick={() => openLightbox(i)} />
         ))}
       </div>
       {lightboxOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50" onClick={() => setLightboxOpen(false)}>
-          <img src={images[image].replace('150x150', '600x600')} alt="Enlarged view" className="max-w-[90vw] max-h-[90vh] rounded-lg" onClick={e => e.stopPropagation()} />
+          <img src={galleryImages[image].replace('150x150', '600x600')} alt="Enlarged view" className="max-w-[90vw] max-h-[90vh] rounded-lg" onClick={e => e.stopPropagation()} />
         </div>
       )}
     </>
@@ -392,49 +393,49 @@ const TimelineExample: React.FC = () => (
   </div>
 );
 
+const stepsData = [1, 2, 3];
 const StepsExample: React.FC = () => {
   const [step, setStep] = useState(2);
-  const steps = [1, 2, 3];
   return (
     <div className="w-full max-w-sm">
       <nav className="flex items-center justify-between">
-        {steps.map((s, i) => (
+        {stepsData.map((s, i) => (
           <React.Fragment key={s}>
             <div className="flex flex-col items-center">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${step >= s ? 'bg-teal-500 text-white' : 'bg-slate-200 text-slate-500'}`}>{s}</div>
               <p className={`text-xs mt-1 transition-colors ${step >= s ? 'text-teal-600 font-semibold' : 'text-slate-500'}`}>Etapa {s}</p>
             </div>
-            {i < steps.length - 1 && <div className={`flex-1 h-0.5 mx-2 transition-colors ${step > s ? 'bg-teal-500' : 'bg-slate-200'}`}></div>}
+            {i < stepsData.length - 1 && <div className={`flex-1 h-0.5 mx-2 transition-colors ${step > s ? 'bg-teal-500' : 'bg-slate-200'}`}></div>}
           </React.Fragment>
         ))}
       </nav>
       <div className="mt-6 flex justify-between">
         <button onClick={() => setStep(s => Math.max(1, s - 1))} className="bg-slate-200 text-slate-800 py-1 px-3 rounded text-sm hover:bg-slate-300 disabled:opacity-50" disabled={step === 1}>Anterior</button>
-        <button onClick={() => setStep(s => Math.min(steps.length, s + 1))} className="bg-slate-200 text-slate-800 py-1 px-3 rounded text-sm hover:bg-slate-300 disabled:opacity-50" disabled={step === steps.length}>Próximo</button>
+        <button onClick={() => setStep(s => Math.min(stepsData.length, s + 1))} className="bg-slate-200 text-slate-800 py-1 px-3 rounded text-sm hover:bg-slate-300 disabled:opacity-50" disabled={step === stepsData.length}>Próximo</button>
       </div>
     </div>
   );
 };
 
+const faqsData = [
+  {
+    id: 1,
+    question: "Qual é a primeira pergunta frequente?",
+    answer: "Esta é a resposta para a primeira pergunta. Respostas detalhadas ajudam o usuário a resolver suas dúvidas rapidamente.",
+  },
+  {
+    id: 2,
+    question: "Como funciona o segundo item?",
+    answer: "O segundo item funciona de forma similar ao primeiro. Ao clicar na pergunta, a resposta é revelada. Clicar novamente irá ocultá-la.",
+  },
+  {
+    id: 3,
+    question: "Qual o benefício deste componente?",
+    answer: "O principal benefício é a organização da informação, permitindo apresentar muito conteúdo de forma compacta e amigável.",
+  },
+];
 const FAQExample: React.FC = () => {
   const [openId, setOpenId] = useState<number | null>(1);
-  const faqs = [
-    {
-      id: 1,
-      question: "Qual é a primeira pergunta frequente?",
-      answer: "Esta é a resposta para a primeira pergunta. Respostas detalhadas ajudam o usuário a resolver suas dúvidas rapidamente.",
-    },
-    {
-      id: 2,
-      question: "Como funciona o segundo item?",
-      answer: "O segundo item funciona de forma similar ao primeiro. Ao clicar na pergunta, a resposta é revelada. Clicar novamente irá ocultá-la.",
-    },
-    {
-      id: 3,
-      question: "Qual o benefício deste componente?",
-      answer: "O principal benefício é a organização da informação, permitindo apresentar muito conteúdo de forma compacta e amigável.",
-    },
-  ];
 
   const toggleFAQ = (id: number) => {
     setOpenId(openId === id ? null : id);
@@ -442,7 +443,7 @@ const FAQExample: React.FC = () => {
 
   return (
     <div className="w-full max-w-md space-y-2">
-      {faqs.map((faq) => (
+      {faqsData.map((faq) => (
         <div key={faq.id} className="border-b border-slate-200">
           <button
             onClick={() => toggleFAQ(faq.id)}
@@ -1067,17 +1068,17 @@ const TableExample: React.FC = () => (
     </div>
 );
 
+const dataGridData = [
+    { id: 1, name: 'Ana', age: 28, role: 'Admin' },
+    { id: 2, name: 'Bruno', age: 34, role: 'Editor' },
+    { id: 3, name: 'Carla', age: 22, role: 'Viewer' },
+];
 const DataGridExample: React.FC = () => {
-    const data = [
-        { id: 1, name: 'Ana', age: 28, role: 'Admin' },
-        { id: 2, name: 'Bruno', age: 34, role: 'Editor' },
-        { id: 3, name: 'Carla', age: 22, role: 'Viewer' },
-    ];
     const [filter, setFilter] = useState('');
-    const [sortConfig, setSortConfig] = useState<{ key: keyof typeof data[0], dir: 'asc' | 'desc' } | null>({ key: 'name', dir: 'asc' });
+    const [sortConfig, setSortConfig] = useState<{ key: keyof typeof dataGridData[0], dir: 'asc' | 'desc' } | null>({ key: 'name', dir: 'asc' });
 
     const sortedData = useMemo(() => {
-        let sortableItems = [...data].filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
+        let sortableItems = [...dataGridData].filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
         if (sortConfig !== null) {
             sortableItems.sort((a, b) => {
                 if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.dir === 'asc' ? -1 : 1;
@@ -1086,9 +1087,9 @@ const DataGridExample: React.FC = () => {
             });
         }
         return sortableItems;
-    }, [data, filter, sortConfig]);
+    }, [filter, sortConfig]);
 
-    const requestSort = (key: keyof typeof data[0]) => {
+    const requestSort = (key: keyof typeof dataGridData[0]) => {
         let dir: 'asc' | 'desc' = 'asc';
         if (sortConfig && sortConfig.key === key && sortConfig.dir === 'asc') {
             dir = 'desc';
@@ -1096,7 +1097,7 @@ const DataGridExample: React.FC = () => {
         setSortConfig({ key, dir });
     };
     
-    const getSortIndicator = (key: keyof typeof data[0]) => {
+    const getSortIndicator = (key: keyof typeof dataGridData[0]) => {
       if (sortConfig?.key === key) return sortConfig.dir === 'asc' ? ' ▲' : ' ▼';
       return '';
     }
@@ -1128,24 +1129,24 @@ const DataGridExample: React.FC = () => {
     );
 };
 
+const chartData = [
+  { label: 'A', value: 45, color: 'fill-teal-500' },
+  { label: 'B', value: 80, color: 'fill-blue-500' },
+  { label: 'C', value: 60, color: 'fill-green-500' },
+  { label: 'D', value: 25, color: 'fill-red-500' },
+];
 const ChartExample: React.FC = () => {
-  const data = [
-    { label: 'A', value: 45, color: 'fill-teal-500' },
-    { label: 'B', value: 80, color: 'fill-blue-500' },
-    { label: 'C', value: 60, color: 'fill-green-500' },
-    { label: 'D', value: 25, color: 'fill-red-500' },
-  ];
   const chartHeight = 150;
   const barWidth = 30;
   const barMargin = 20;
-  const svgWidth = data.length * (barWidth + barMargin);
+  const svgWidth = chartData.length * (barWidth + barMargin);
   const maxValue = 100;
 
   return (
     <div className="w-full max-w-sm p-4 flex justify-center items-center">
       <svg viewBox={`0 0 ${svgWidth} ${chartHeight + 20}`} aria-label="Gráfico de barras" role="img" className="w-full h-auto">
         <title>Exemplo de Gráfico de Barras</title>
-        {data.map((item, index) => {
+        {chartData.map((item, index) => {
           const barHeight = (item.value / maxValue) * chartHeight;
           const x = index * (barWidth + barMargin);
           const y = chartHeight - barHeight;
@@ -1323,27 +1324,27 @@ const TreeViewNode: React.FC<{ node: any, level: number }> = ({ node, level }) =
     );
 };
 
+const treeViewData = {
+    name: 'Projeto',
+    isOpen: true,
+    children: [
+        { name: 'index.html' },
+        { 
+            name: 'src', 
+            isOpen: true,
+            children: [
+                { name: 'App.tsx' },
+                { name: 'index.tsx' },
+            ]
+        },
+        { name: 'package.json' },
+    ]
+};
 const TreeViewExample: React.FC = () => {
-    const treeData = {
-        name: 'Projeto',
-        isOpen: true,
-        children: [
-            { name: 'index.html' },
-            { 
-                name: 'src', 
-                isOpen: true,
-                children: [
-                    { name: 'App.tsx' },
-                    { name: 'index.tsx' },
-                ]
-            },
-            { name: 'package.json' },
-        ]
-    };
     return (
         <div className="w-full max-w-xs bg-white p-2 rounded-lg border">
             <ul className="text-slate-800">
-                <TreeViewNode node={treeData} level={0} />
+                <TreeViewNode node={treeViewData} level={0} />
             </ul>
         </div>
     );
@@ -1372,15 +1373,15 @@ const DrawerExample: React.FC = () => {
     );
 };
 
+const scrollableTabsData = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 const ScrollableTabsExample: React.FC = () => {
     const [activeTab, setActiveTab] = useState('Item 5');
-    const tabs = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
 
     return (
         <div className="w-full max-w-md">
             <div className="relative border-b border-slate-200">
                 <div className="flex overflow-x-auto space-x-4 pb-px no-scrollbar">
-                    {tabs.map(tab => (
+                    {scrollableTabsData.map(tab => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
@@ -1402,11 +1403,10 @@ const ScrollableTabsExample: React.FC = () => {
     );
 };
 
+const calendarDaysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+const calendarMonthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 const CalendarViewExample: React.FC = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
-  
-    const daysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -1422,11 +1422,11 @@ const CalendarViewExample: React.FC = () => {
         <div className="w-full max-w-xs bg-white p-3 rounded-lg shadow-md border">
             <div className="flex justify-between items-center mb-2">
                 <button onClick={() => changeMonth(-1)} className="p-1 rounded-full hover:bg-slate-100">&lt;</button>
-                <h3 className="font-semibold text-sm">{monthNames[month]} {year}</h3>
+                <h3 className="font-semibold text-sm">{calendarMonthNames[month]} {year}</h3>
                 <button onClick={() => changeMonth(1)} className="p-1 rounded-full hover:bg-slate-100">&gt;</button>
             </div>
             <div className="grid grid-cols-7 text-center text-xs text-slate-500">
-                {daysOfWeek.map((day, i) => <div key={`${day}-${i}`} className="font-medium">{day}</div>)}
+                {calendarDaysOfWeek.map((day, i) => <div key={`${day}-${i}`} className="font-medium">{day}</div>)}
             </div>
             <div className="grid grid-cols-7 text-center text-sm mt-1">
                 {Array.from({ length: firstDayOfMonth }).map((_, i) => <div key={`empty-${i}`}></div>)}
@@ -1444,16 +1444,16 @@ const CalendarViewExample: React.FC = () => {
     );
 };
 
+const autoCompleteOptions = ['React', 'Angular', 'Vue', 'Svelte', 'Solid', 'Next.js'];
 const AutoCompleteExample: React.FC = () => {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
-    const allOptions = ['React', 'Angular', 'Vue', 'Svelte', 'Solid', 'Next.js'];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setQuery(value);
         if (value.length > 0) {
-            const filtered = allOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
+            const filtered = autoCompleteOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
             setSuggestions(filtered);
         } else {
             setSuggestions([]);
