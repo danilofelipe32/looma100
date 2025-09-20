@@ -1260,6 +1260,289 @@ const BreadcrumbFilterComboExample: React.FC = () => (
 );
 // END: "Extras & Avançados" Components
 
+// START: New components requested by user
+const DividerExample: React.FC = () => (
+    <div className="w-full max-w-sm flex flex-col items-center space-y-4">
+        <div className="w-full flex items-center">
+            <div className="flex-grow border-t border-slate-300"></div>
+            <span className="flex-shrink mx-4 text-slate-500 text-sm">Conteúdo</span>
+            <div className="flex-grow border-t border-slate-300"></div>
+        </div>
+        <div className="w-full border-t border-slate-300 border-dashed"></div>
+        <p className="text-sm text-slate-600">Texto acima</p>
+        <div className="w-full border-t border-teal-500"></div>
+        <p className="text-sm text-slate-600">Texto abaixo</p>
+    </div>
+);
+
+const ListGroupExample: React.FC = () => (
+    <div className="w-full max-w-sm bg-white rounded-lg shadow-md border border-slate-200">
+        <ul className="divide-y divide-slate-200">
+            <li className="p-3 flex items-center hover:bg-slate-50 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-slate-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                <span className="flex-1 font-medium text-slate-800">Perfil</span>
+                <span className="text-xs text-slate-500">Ver</span>
+            </li>
+            <li className="p-3 flex items-center hover:bg-slate-50 cursor-pointer bg-teal-50 border-l-4 border-teal-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-teal-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                <div className="flex-1">
+                    <p className="font-medium text-teal-800">Mensagens</p>
+                    <p className="text-xs text-teal-600">Nova mensagem de Alex</p>
+                </div>
+                <span className="bg-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">3</span>
+            </li>
+            <li className="p-3 flex items-center hover:bg-slate-50 cursor-pointer">
+                <img className="h-10 w-10 rounded-full mr-3" src="https://placehold.co/100x100/e2e8f0/475569?text=DA" alt="Avatar"/>
+                <div className="flex-1">
+                    <p className="font-medium text-slate-800">Danilo Arruda</p>
+                    <p className="text-xs text-slate-500">Online</p>
+                </div>
+                <button className="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-1 px-3 rounded-md">Adicionar</button>
+            </li>
+        </ul>
+    </div>
+);
+
+const TreeViewNode: React.FC<{ node: any, level: number }> = ({ node, level }) => {
+    const [isOpen, setIsOpen] = useState(node.isOpen ?? false);
+
+    return (
+        <li style={{ paddingLeft: `${level * 16}px` }}>
+            <div className="flex items-center py-1 cursor-pointer hover:bg-slate-100 rounded" onClick={() => setIsOpen(!isOpen)}>
+                {node.children && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 mr-1 transition-transform flex-shrink-0 ${isOpen ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
+                )}
+                <span className={`text-sm ${!node.children ? 'ml-5' : ''}`}>{node.name}</span>
+            </div>
+            {isOpen && node.children && (
+                <ul className="text-slate-600">
+                    {node.children.map((child: any, index: number) => <TreeViewNode key={`${child.name}-${index}`} node={child} level={level + 1} />)}
+                </ul>
+            )}
+        </li>
+    );
+};
+
+const TreeViewExample: React.FC = () => {
+    const treeData = {
+        name: 'Projeto',
+        isOpen: true,
+        children: [
+            { name: 'index.html' },
+            { 
+                name: 'src', 
+                isOpen: true,
+                children: [
+                    { name: 'App.tsx' },
+                    { name: 'index.tsx' },
+                ]
+            },
+            { name: 'package.json' },
+        ]
+    };
+    return (
+        <div className="w-full max-w-xs bg-white p-2 rounded-lg border">
+            <ul className="text-slate-800">
+                <TreeViewNode node={treeData} level={0} />
+            </ul>
+        </div>
+    );
+};
+
+const DrawerExample: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div className="w-full h-48 bg-slate-200 rounded-lg flex items-center justify-center relative overflow-hidden">
+            <button onClick={() => setIsOpen(true)} className="bg-teal-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-teal-600 transition-colors">Abrir Drawer</button>
+            {/* Overlay */}
+            <div onClick={() => setIsOpen(false)} className={`fixed inset-0 bg-black transition-opacity ${isOpen ? 'bg-opacity-50 z-30' : 'bg-opacity-0 pointer-events-none'}`}></div>
+            {/* Drawer Panel */}
+            <aside className={`fixed top-0 right-0 h-full bg-white w-64 shadow-xl transform transition-transform z-40 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className="p-4 border-b flex justify-between items-center">
+                    <h3 className="font-bold">Menu</h3>
+                    <button onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-slate-800 text-2xl">&times;</button>
+                </div>
+                <nav className="p-4 space-y-2">
+                    <a href="#" className="block p-2 rounded hover:bg-slate-100">Início</a>
+                    <a href="#" className="block p-2 rounded hover:bg-slate-100">Perfil</a>
+                    <a href="#" className="block p-2 rounded hover:bg-slate-100">Configurações</a>
+                </nav>
+            </aside>
+        </div>
+    );
+};
+
+const ScrollableTabsExample: React.FC = () => {
+    const [activeTab, setActiveTab] = useState('Item 5');
+    const tabs = Array.from({ length: 10 }, (_, i) => `Item ${i + 1}`);
+
+    return (
+        <div className="w-full max-w-md">
+            <div className="relative border-b border-slate-200">
+                <div className="flex overflow-x-auto space-x-4 pb-px no-scrollbar">
+                    {tabs.map(tab => (
+                        <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`whitespace-nowrap py-2 px-3 font-medium text-sm rounded-t-md transition-colors ${
+                                activeTab === tab
+                                ? 'bg-teal-50 text-teal-600 border-b-2 border-teal-500'
+                                : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
+                            }`}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className="pt-4 text-slate-600 text-sm">
+                <p>Conteúdo para <span className="font-bold">{activeTab}</span>.</p>
+            </div>
+        </div>
+    );
+};
+
+const CalendarViewExample: React.FC = () => {
+    const [currentDate, setCurrentDate] = useState(new Date());
+  
+    const daysOfWeek = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    const changeMonth = (offset: number) => {
+        setCurrentDate(new Date(year, month + offset, 1));
+    };
+
+    return (
+        <div className="w-full max-w-xs bg-white p-3 rounded-lg shadow-md border">
+            <div className="flex justify-between items-center mb-2">
+                <button onClick={() => changeMonth(-1)} className="p-1 rounded-full hover:bg-slate-100">&lt;</button>
+                <h3 className="font-semibold text-sm">{monthNames[month]} {year}</h3>
+                <button onClick={() => changeMonth(1)} className="p-1 rounded-full hover:bg-slate-100">&gt;</button>
+            </div>
+            <div className="grid grid-cols-7 text-center text-xs text-slate-500">
+                {daysOfWeek.map((day, i) => <div key={`${day}-${i}`} className="font-medium">{day}</div>)}
+            </div>
+            <div className="grid grid-cols-7 text-center text-sm mt-1">
+                {Array.from({ length: firstDayOfMonth }).map((_, i) => <div key={`empty-${i}`}></div>)}
+                {Array.from({ length: daysInMonth }).map((_, day) => {
+                    const dayNumber = day + 1;
+                    const isToday = new Date().toDateString() === new Date(year, month, dayNumber).toDateString();
+                    return (
+                        <div key={dayNumber} className={`p-1 rounded-full w-7 h-7 flex items-center justify-center mx-auto ${isToday ? 'bg-teal-500 text-white' : 'hover:bg-slate-100 cursor-pointer'}`}>
+                            {dayNumber}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+const AutoCompleteExample: React.FC = () => {
+    const [query, setQuery] = useState('');
+    const [suggestions, setSuggestions] = useState<string[]>([]);
+    const allOptions = ['React', 'Angular', 'Vue', 'Svelte', 'Solid', 'Next.js'];
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setQuery(value);
+        if (value.length > 0) {
+            const filtered = allOptions.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
+            setSuggestions(filtered);
+        } else {
+            setSuggestions([]);
+        }
+    };
+    
+    return (
+        <div className="relative w-full max-w-xs">
+            <label htmlFor="autocomplete" className="block text-sm font-medium text-slate-700 mb-1">Buscar Framework</label>
+            <input 
+                id="autocomplete"
+                type="text"
+                value={query}
+                onChange={handleChange}
+                className="w-full p-2 border border-slate-300 rounded-md focus:ring-teal-500 focus:border-teal-500"
+                autoComplete="off"
+            />
+            {suggestions.length > 0 && (
+                <ul className="absolute z-10 w-full bg-white border border-slate-200 rounded-md mt-1 shadow-lg max-h-40 overflow-y-auto">
+                    {suggestions.map(s => (
+                        <li key={s} onClick={() => { setQuery(s); setSuggestions([]); }} className="p-2 text-sm hover:bg-slate-100 cursor-pointer">{s}</li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
+
+const DateRangePickerExample: React.FC = () => {
+    const [startDate, setStartDate] = useState('2024-08-01');
+    const [endDate, setEndDate] = useState('2024-08-07');
+
+    return (
+        <div className="w-full max-w-sm flex flex-col space-y-2">
+            <div>
+                <label htmlFor="start-date" className="block text-sm font-medium text-slate-700">Data de Início</label>
+                <input
+                    type="date"
+                    id="start-date"
+                    value={startDate}
+                    onChange={e => setStartDate(e.target.value)}
+                    className="mt-1 block w-full rounded-md border border-slate-300 py-2 px-3 shadow-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+                />
+            </div>
+            <div>
+                <label htmlFor="end-date" className="block text-sm font-medium text-slate-700">Data Final</label>
+                <input
+                    type="date"
+                    id="end-date"
+                    value={endDate}
+                    onChange={e => setEndDate(e.target.value)}
+                    className="mt-1 block w-full rounded-md border border-slate-300 py-2 px-3 shadow-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+                />
+            </div>
+        </div>
+    );
+};
+
+const RatingExample: React.FC = () => {
+    const [rating, setRating] = useState(3);
+    const [hoverRating, setHoverRating] = useState(0);
+
+    return (
+        <div className="flex items-center space-x-1">
+            {[1, 2, 3, 4, 5].map(star => (
+                <button
+                    key={star}
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHoverRating(star)}
+                    onMouseLeave={() => setHoverRating(0)}
+                    className="text-2xl"
+                    aria-label={`Avaliar ${star} de 5 estrelas`}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`h-6 w-6 transition-colors ${(hoverRating || rating) >= star ? 'text-yellow-400' : 'text-slate-300'}`}
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                </button>
+            ))}
+        </div>
+    );
+};
+// END: New components requested by user
+
+
 export const componentCategories: ComponentCategory[] = [
   {
     title: "Estrutura & Layout",
@@ -1380,6 +1663,23 @@ export const componentCategories: ComponentCategory[] = [
   <p className="text-slate-600 text-sm mt-1">
     Este é um bloco de conteúdo encapsulado.
   </p>
+</div>
+`
+      },
+      {
+        name: "Divider / Separator",
+        description: "Linhas ou espaços visuais para separar ou agrupar conteúdo, melhorando a clareza e a organização do layout.",
+        component: <DividerExample />,
+        code: `
+<div className="w-full max-w-sm space-y-4">
+    {/* Divisor com texto */}
+    <div className="flex items-center">
+        <div className="flex-grow border-t border-slate-300"></div>
+        <span className="mx-4 text-slate-500">Conteúdo</span>
+        <div className="flex-grow border-t border-slate-300"></div>
+    </div>
+    {/* Divisor simples */}
+    <div className="w-full border-t border-teal-500"></div>
 </div>
 `
       },
@@ -1567,7 +1867,88 @@ const Sidebar = () => {
   </div>
   {/* ... mais filtros */}
 </div>`
-      }
+      },
+      {
+        name: "List Group",
+        description: "Exibe uma lista de itens com conteúdo variado, incluindo ícones, avatares e ações, para uma apresentação rica.",
+        component: <ListGroupExample />,
+        code: `
+<div className="w-full max-w-sm bg-white rounded-lg shadow-md border">
+    <ul className="divide-y divide-slate-200">
+        <li className="p-3 flex items-center hover:bg-slate-50">
+            {/* Ícone */}
+            <span className="flex-1">Perfil</span>
+            <span className="text-xs">Ver</span>
+        </li>
+        <li className="p-3 flex items-center hover:bg-slate-50 bg-teal-50">
+            {/* Ícone Ativo + Badge */}
+            <div className="flex-1">...</div>
+            <span className="bg-teal-500 ...">3</span>
+        </li>
+        <li className="p-3 flex items-center hover:bg-slate-50">
+            <img className="h-10 w-10 rounded-full mr-3" src="..." alt="Avatar"/>
+            <div className="flex-1">...</div>
+            <button>Adicionar</button>
+        </li>
+    </ul>
+</div>`
+      },
+      {
+        name: "Tree View / Nested List",
+        description: "Exibe informações em uma estrutura hierárquica, permitindo que os usuários expandam e recolham ramos.",
+        component: <TreeViewExample />,
+        code: `
+const TreeNode = ({ node, level }) => {
+  const [isOpen, setIsOpen] = useState(node.isOpen);
+
+  return (
+    <li style={{ paddingLeft: \`\${level * 16}px\` }}>
+      <div onClick={() => setIsOpen(!isOpen)}>
+        {node.children && <span>{isOpen ? '▼' : '►'}</span>}
+        <span>{node.name}</span>
+      </div>
+      {isOpen && node.children && (
+        <ul>
+          {node.children.map(child => <TreeNode ... />)}
+        </ul>
+      )}
+    </li>
+  );
+};`
+      },
+      {
+        name: "Drawer / Off-canvas",
+        description: "Um painel lateral que desliza para fora da tela, usado para navegação, filtros ou conteúdo secundário.",
+        component: <DrawerExample />,
+        code: `
+const Drawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div>
+      <button onClick={() => setIsOpen(true)}>Abrir Drawer</button>
+      {/* Overlay */}
+      <div className={isOpen ? 'fixed inset-0 bg-black/50' : 'hidden'} onClick={() => setIsOpen(false)}></div>
+      {/* Painel */}
+      <aside className={\`fixed top-0 right-0 h-full ... \${isOpen ? 'translate-x-0' : 'translate-x-full'}\`}>
+        {/* Conteúdo do Drawer */}
+      </aside>
+    </div>
+  );
+}`
+      },
+      {
+        name: "Scrollable Tabs",
+        description: "Uma variação de abas que permite rolagem horizontal quando o número de abas excede o espaço disponível.",
+        component: <ScrollableTabsExample />,
+        code: `
+<div className="relative border-b">
+    <div className="flex overflow-x-auto space-x-4 no-scrollbar">
+        {tabs.map(tab => (
+            <button key={tab} ... >{tab}</button>
+        ))}
+    </div>
+</div>`
+      },
     ]
   },
   {
@@ -1750,7 +2131,34 @@ const FAQ = () => {
     </div>
   );
 };`
-      }
+      },
+      {
+        name: "Calendar / Agenda View",
+        description: "Exibe datas em uma visualização de calendário mensal, útil para agendamentos, eventos ou logs de atividades.",
+        component: <CalendarViewExample />,
+        code: `
+const Calendar = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  // Lógica para gerar os dias do mês
+  
+  return (
+    <div className="w-full max-w-xs bg-white p-3 rounded-lg shadow-md border">
+      <div className="flex justify-between items-center mb-2">
+        <button> &lt; </button>
+        <h3>{/* Mês e Ano */}</h3>
+        <button> &gt; </button>
+      </div>
+      <div className="grid grid-cols-7 text-center text-xs">
+        {/* Dias da semana */}
+      </div>
+      <div className="grid grid-cols-7 text-center text-sm mt-1">
+        {/* Dias do mês */}
+      </div>
+    </div>
+  );
+};`
+      },
     ]
   },
   {
@@ -2031,7 +2439,83 @@ const DateTimePicker = () => {
       Limpar
     </button>
 </div>`
-      }
+      },
+      {
+        name: "Autocomplete / Typeahead",
+        description: "Um campo de texto que sugere opções em tempo real com base no que o usuário digita, facilitando a entrada de dados.",
+        component: <AutoCompleteExample />,
+        code: `
+const AutoComplete = () => {
+    const [query, setQuery] = useState('');
+    const [suggestions, setSuggestions] = useState([]);
+    const allOptions = ['React', 'Angular', 'Vue'];
+
+    const handleChange = (value) => {
+        setQuery(value);
+        // Lógica de filtro...
+        setSuggestions(filteredOptions);
+    };
+    
+    return (
+        <div className="relative">
+            <input type="text" value={query} onChange={...} />
+            {suggestions.length > 0 && (
+                <ul>
+                    {suggestions.map(s => <li onClick={...}>{s}</li>)}
+                </ul>
+            )}
+        </div>
+    );
+}`
+      },
+      {
+        name: "Date Range Picker",
+        description: "Permite que os usuários selecionem um intervalo de datas (início e fim) de forma visual e intuitiva.",
+        component: <DateRangePickerExample />,
+        code: `
+const DateRange = () => {
+    const [startDate, setStartDate] = useState('2024-08-01');
+    const [endDate, setEndDate] = useState('2024-08-07');
+
+    return (
+        <div className="flex flex-col space-y-2">
+            <div>
+                <label>Data de Início</label>
+                <input type="date" value={startDate} onChange={...} />
+            </div>
+            <div>
+                <label>Data Final</label>
+                <input type="date" value={endDate} onChange={...} />
+            </div>
+        </div>
+    );
+}`
+      },
+      {
+        name: "Rating / Stars",
+        description: "Componente para avaliações visuais, geralmente com estrelas, permitindo que os usuários deem uma nota.",
+        component: <RatingExample />,
+        code: `
+const Rating = () => {
+    const [rating, setRating] = useState(3);
+    const [hover, setHover] = useState(0);
+
+    return (
+        <div className="flex space-x-1">
+            {[1, 2, 3, 4, 5].map(star => (
+                <button
+                    key={star}
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHover(star)}
+                    onMouseLeave={() => setHover(0)}
+                >
+                    <StarIcon className={(hover || rating) >= star ? 'active' : 'inactive'}/>
+                </button>
+            ))}
+        </div>
+    );
+}`
+      },
     ]
   },
   {
