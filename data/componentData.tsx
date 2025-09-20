@@ -13,7 +13,7 @@ const ContainerExample: React.FC = () => (
 );
 
 const SectionExample: React.FC = () => (
-  <section className="w-full bg-white shadow-md p-6 rounded-lg border-l-4 border-teal-500 transition-shadow hover:shadow-lg">
+  <section className="w-full bg-white shadow-md p-4 sm:p-6 rounded-lg border-l-4 border-teal-500 transition-shadow hover:shadow-lg">
     <h3 className="font-bold text-lg mb-2">Título da Seção</h3>
     <p className="text-slate-600 text-sm">Este é um bloco de conteúdo temático.</p>
   </section>
@@ -30,7 +30,7 @@ const HeaderExample: React.FC = () => (
 );
 
 const NavbarExample: React.FC = () => (
-  <nav className="w-full bg-teal-500 p-3 rounded-lg flex justify-center items-center space-x-6">
+  <nav className="w-full bg-teal-500 p-3 rounded-lg flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
     <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md transition-all">Início</a>
     <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md transition-all">Sobre</a>
     <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md transition-all">Contato</a>
@@ -38,8 +38,8 @@ const NavbarExample: React.FC = () => (
 );
 
 const SidebarExample: React.FC = () => (
-  <div className="w-full h-56 flex rounded-lg overflow-hidden bg-white shadow-md">
-    <aside className="w-1/3 bg-slate-800 p-4 flex flex-col">
+  <div className="w-full h-auto md:h-56 flex flex-col md:flex-row rounded-lg overflow-hidden bg-white shadow-md">
+    <aside className="w-full md:w-1/3 bg-slate-800 p-4 flex flex-col">
       <div className="flex items-center mb-6 shrink-0">
          <div className="w-8 h-8 bg-teal-500 rounded-md mr-3 flex items-center justify-center text-white font-bold text-lg">L</div>
          <span className="text-white font-semibold">Looma</span>
@@ -59,7 +59,7 @@ const SidebarExample: React.FC = () => (
         </a>
       </nav>
     </aside>
-    <main className="w-2/3 p-4 flex items-center justify-center bg-slate-50">
+    <main className="w-full md:w-2/3 p-4 flex items-center justify-center bg-slate-50 min-h-[120px]">
       <p className="text-sm text-slate-600">Conteúdo principal.</p>
     </main>
   </div>
@@ -72,18 +72,19 @@ const FooterExample: React.FC = () => (
 );
 
 const GridFlexboxExample: React.FC = () => (
-  <div className="w-full grid grid-cols-3 gap-3">
+  <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-3">
     <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer">1</div>
     <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer">2</div>
     <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer">3</div>
-    <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer col-span-2">4</div>
+    <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer col-span-2 sm:col-span-1">4</div>
     <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer">5</div>
+     <div className="bg-teal-100 h-16 rounded-lg flex items-center justify-center font-bold text-teal-800 transition-transform hover:scale-105 cursor-pointer">6</div>
   </div>
 );
 
 const HeroExample: React.FC = () => (
-    <div className="w-full text-center bg-slate-200 p-8 rounded-lg">
-      <h2 className="text-3xl font-bold">Hero Title</h2>
+    <div className="w-full text-center bg-slate-200 p-6 sm:p-8 rounded-lg">
+      <h2 className="text-2xl sm:text-3xl font-bold">Hero Title</h2>
       <p className="mt-2 text-slate-600">Descrição atrativa aqui.</p>
       <button className="mt-4 bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-lg transition-transform hover:scale-105 shadow-md hover:shadow-lg">Call to Action</button>
     </div>
@@ -101,7 +102,7 @@ const CardExample: React.FC = () => (
 // START: "Navegação & Organização" Components
 const BreadcrumbExample: React.FC = () => (
   <nav aria-label="breadcrumb">
-    <ol className="flex items-center space-x-2 text-sm text-slate-500">
+    <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-500">
       <li><a href="#" className="hover:text-teal-500">Início</a></li>
       <li><span className="select-none">&gt;</span></li>
       <li><a href="#" className="hover:text-teal-500">Categoria</a></li>
@@ -115,7 +116,7 @@ const PaginationExample: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(2);
   const pages = [1, 2, 3];
   return(
-    <nav className="flex items-center space-x-2 text-sm">
+    <nav className="flex flex-wrap justify-center items-center gap-2 text-sm">
         <button className="px-3 py-1 rounded-md hover:bg-slate-200">Previous</button>
         {pages.map(p => (
             <button key={p} onClick={() => setCurrentPage(p)} className={`w-8 h-8 rounded-md ${currentPage === p ? 'bg-teal-500 text-white' : 'hover:bg-slate-200'}`}>{p}</button>
@@ -132,7 +133,7 @@ const TabsExample: React.FC = () => {
   return (
     <div className="w-full max-w-sm">
       <div className="border-b border-slate-200">
-        <nav className="-mb-px flex space-x-4" aria-label="Tabs">
+        <nav className="-mb-px flex flex-wrap space-x-4" aria-label="Tabs">
           <button onClick={() => setActiveTab(1)} className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 1 ? 'border-teal-500 text-teal-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>Aba 1</button>
           <button onClick={() => setActiveTab(2)} className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 2 ? 'border-teal-500 text-teal-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>Aba 2</button>
           <button onClick={() => setActiveTab(3)} className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 3 ? 'border-teal-500 text-teal-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>Aba 3</button>
@@ -190,14 +191,14 @@ const DropdownExample: React.FC = () => {
 };
 
 const SubmenuExample: React.FC = () => (
-  <nav className="w-full bg-slate-800 p-3 rounded-lg flex justify-center items-center space-x-6">
+  <nav className="w-full bg-slate-800 p-3 rounded-lg flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
     <a href="#" className="text-white font-semibold px-3 py-1">Início</a>
     <div className="relative group">
        <button className="text-white font-semibold px-3 py-1 flex items-center">
         Serviços
         <svg className="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
       </button>
-      <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
         <a href="#" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Web Design</a>
         <a href="#" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Marketing</a>
       </div>
@@ -260,7 +261,7 @@ const SearchBarExample: React.FC = () => (
 );
 
 const FilterSortExample: React.FC = () => (
-    <div className="flex space-x-4 items-center w-full">
+    <div className="flex flex-col sm:flex-row gap-4 w-full">
         <div className="flex-1">
             <label htmlFor="sort" className="block text-sm font-medium text-slate-700">Ordenar por</label>
             <select id="sort" className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm rounded-md">
@@ -287,11 +288,11 @@ const ModalExample: React.FC = () => {
     <>
       <button onClick={() => setIsOpen(true)} className="bg-teal-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-teal-600 transition-colors">Abrir Modal</button>
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
             <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold">Título do Modal</h3>
-                <button onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-slate-800">&times;</button>
+                <button onClick={() => setIsOpen(false)} className="text-slate-500 hover:text-slate-800 text-2xl">&times;</button>
             </div>
             <p className="mt-2 text-sm text-slate-600">Este é o conteúdo dentro do modal. Você pode colocar qualquer coisa aqui.</p>
             <div className="text-right mt-4">
@@ -1009,7 +1010,7 @@ const IframeExample: React.FC = () => (
 );
 
 const IconExample: React.FC = () => (
-    <div className="flex items-center justify-center space-x-6 text-slate-700">
+    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 text-slate-700">
       <div className="flex flex-col items-center">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:text-teal-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
         <span className="text-xs mt-1">Home</span>
@@ -1039,8 +1040,8 @@ const AvatarExample: React.FC = () => (
 
 // START: "Extras & Avançados" Components
 const TableExample: React.FC = () => (
-    <div className="w-full overflow-x-auto">
-        <table className="min-w-full text-sm text-left text-slate-500 rounded-lg shadow-md">
+    <div className="w-full overflow-x-auto rounded-lg shadow-md border">
+        <table className="min-w-full text-sm text-left text-slate-500">
             <thead className="text-xs text-slate-700 uppercase bg-slate-100">
                 <tr>
                     <th scope="col" className="px-4 py-3">Produto</th>
@@ -1100,25 +1101,27 @@ const DataGridExample: React.FC = () => {
 
     return (
         <div className="w-full">
-            <input type="text" placeholder="Filtrar por nome..." value={filter} onChange={e => setFilter(e.target.value)} className="w-full mb-2 p-1 border rounded" />
-            <table className="w-full text-sm text-left">
-                <thead className="bg-slate-100">
-                    <tr>
-                        <th onClick={() => requestSort('name')} className="cursor-pointer px-2 py-2">Nome{getSortIndicator('name')}</th>
-                        <th onClick={() => requestSort('age')} className="cursor-pointer px-2 py-2">Idade{getSortIndicator('age')}</th>
-                        <th onClick={() => requestSort('role')} className="cursor-pointer px-2 py-2">Função{getSortIndicator('role')}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sortedData.map(item => (
-                        <tr key={item.id} className="border-b hover:bg-slate-50">
-                            <td className="px-2 py-2">{item.name}</td>
-                            <td className="px-2 py-2">{item.age}</td>
-                            <td className="px-2 py-2">{item.role}</td>
+            <input type="text" placeholder="Filtrar por nome..." value={filter} onChange={e => setFilter(e.target.value)} className="w-full mb-2 p-2 border rounded text-sm" />
+             <div className="w-full overflow-x-auto rounded-lg border">
+                <table className="w-full text-sm text-left whitespace-nowrap">
+                    <thead className="bg-slate-100 text-xs uppercase">
+                        <tr>
+                            <th onClick={() => requestSort('name')} className="cursor-pointer px-3 py-2">{`Nome${getSortIndicator('name')}`}</th>
+                            <th onClick={() => requestSort('age')} className="cursor-pointer px-3 py-2">{`Idade${getSortIndicator('age')}`}</th>
+                            <th onClick={() => requestSort('role')} className="cursor-pointer px-3 py-2">{`Função${getSortIndicator('role')}`}</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {sortedData.map(item => (
+                            <tr key={item.id} className="border-b hover:bg-slate-50">
+                                <td className="px-3 py-2">{item.name}</td>
+                                <td className="px-3 py-2">{item.age}</td>
+                                <td className="px-3 py-2">{item.role}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
@@ -1242,7 +1245,7 @@ const BreadcrumbFilterComboExample: React.FC = () => (
                 <li className="font-semibold text-slate-700" aria-current="page">Produtos</li>
             </ol>
         </nav>
-        <div className="mt-4 pt-4 border-t flex items-center gap-4 text-sm">
+        <div className="mt-4 pt-4 border-t flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4 text-sm">
             <span className="font-semibold">Filtrar por:</span>
             <select className="border-slate-300 rounded-md text-sm py-1">
                 <option>Categoria</option>
@@ -1278,7 +1281,7 @@ export const componentCategories: ComponentCategory[] = [
         description: "Divide a página em áreas temáticas ou blocos de conteúdo distintos, melhorando a organização visual e a semântica do HTML.",
         component: <SectionExample />,
         code: `
-<section className="w-full bg-white shadow-md p-6 rounded-lg border-l-4 border-teal-500">
+<section className="w-full bg-white shadow-md p-4 sm:p-6 rounded-lg border-l-4 border-teal-500">
   <h3 className="font-bold text-lg mb-2">Título da Seção</h3>
   <p className="text-slate-600 text-sm">Este é um bloco de conteúdo temático.</p>
 </section>`
@@ -1301,10 +1304,10 @@ export const componentCategories: ComponentCategory[] = [
         description: "Um conjunto de links que permite aos usuários navegar pelas principais seções de um site. Essencial para a usabilidade.",
         component: <NavbarExample />,
         code: `
-<nav className="w-full bg-teal-500 p-3 rounded-lg flex justify-center items-center space-x-6">
-  <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md transition-all">Início</a>
-  <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md transition-all">Sobre</a>
-  <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md transition-all">Contato</a>
+<nav className="w-full bg-teal-500 p-3 rounded-lg flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
+  <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md">Início</a>
+  <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md">Sobre</a>
+  <a href="#" className="text-white font-semibold hover:bg-teal-600 px-3 py-1 rounded-md">Contato</a>
 </nav>`
       },
       {
@@ -1312,33 +1315,18 @@ export const componentCategories: ComponentCategory[] = [
         description: "Uma coluna vertical, geralmente à esquerda ou direita, contendo navegação secundária, filtros ou informações contextuais.",
         component: <SidebarExample />,
         code: `
-<div className="w-full h-56 flex rounded-lg overflow-hidden bg-white shadow-md">
-  {/* A sidebar ocupa 1/3 do container */}
-  <aside className="w-1/3 bg-slate-800 p-4 flex flex-col">
-    {/* Cabeçalho opcional da sidebar */}
-    <div className="flex items-center mb-6 shrink-0">
-      <div className="w-8 h-8 bg-teal-500 rounded-md mr-3 ...">L</div>
-      <span className="text-white font-semibold">Looma</span>
-    </div>
-    {/* Navegação principal */}
+<div className="w-full h-auto md:h-56 flex flex-col md:flex-row rounded-lg overflow-hidden bg-white shadow-md">
+  {/* Em telas móveis, a sidebar fica no topo */}
+  <aside className="w-full md:w-1/3 bg-slate-800 p-4 flex flex-col">
+    {/* ... */}
     <nav className="flex flex-col space-y-2">
-      <a href="#" className="flex items-center p-2 text-slate-300 hover:bg-slate-700 ...">
-        <svg>...</svg> {/* Ícone de Painel */}
-        Painel
-      </a>
-      <a href="#" className="flex items-center p-2 text-slate-300 hover:bg-slate-700 ...">
-        <svg>...</svg> {/* Ícone de Perfil */}
-        Perfil
-      </a>
-      {/* Item ativo */}
-      <a href="#" className="flex items-center p-2 bg-slate-900 text-white ...">
-        <svg>...</svg> {/* Ícone de Ajustes */}
-        Ajustes
-      </a>
+      <a href="#">Painel</a>
+      <a href="#">Perfil</a>
+      <a href="#">Ajustes</a>
     </nav>
   </aside>
-  {/* Conteúdo principal */}
-  <main className="w-2/3 p-4 flex items-center justify-center bg-slate-50">
+  {/* Conteúdo principal abaixo em telas móveis, ao lado em telas maiores */}
+  <main className="w-full md:w-2/3 p-4 flex items-center justify-center bg-slate-50">
     <p>Conteúdo principal.</p>
   </main>
 </div>`
@@ -1357,13 +1345,13 @@ export const componentCategories: ComponentCategory[] = [
         description: "Sistemas de layout poderosos para criar arranjos responsivos e complexos. Grid é para layout 2D, Flexbox para 1D.",
         component: <GridFlexboxExample />,
         code: `
-<div className="w-full grid grid-cols-3 gap-3">
-  <div className="bg-teal-100 h-16 rounded-lg flex ...">1</div>
-  <div className="bg-teal-100 h-16 rounded-lg flex ...">2</div>
-  <div className="bg-teal-100 h-16 rounded-lg flex ...">3</div>
-  {/* col-span-2 faz este item ocupar 2 colunas */}
-  <div className="bg-teal-100 h-16 rounded-lg flex col-span-2 ...">4</div>
-  <div className="bg-teal-100 h-16 rounded-lg flex ...">5</div>
+<div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-3">
+  <div className="...">1</div>
+  <div className="...">2</div>
+  <div className="...">3</div>
+  <div className="col-span-2 sm:col-span-1 ...">4</div>
+  <div className="...">5</div>
+  <div className="...">6</div>
 </div>`
       },
       {
@@ -1371,10 +1359,10 @@ export const componentCategories: ComponentCategory[] = [
         description: "Área de destaque no topo da página para capturar a atenção do usuário com uma imagem impactante e um call-to-action.",
         component: <HeroExample />,
         code: `
-<div className="w-full text-center bg-slate-200 p-8 rounded-lg">
-  <h2 className="text-3xl font-bold">Hero Title</h2>
+<div className="w-full text-center bg-slate-200 p-6 sm:p-8 rounded-lg">
+  <h2 className="text-2xl sm:text-3xl font-bold">Hero Title</h2>
   <p className="mt-2 text-slate-600">Descrição atrativa aqui.</p>
-  <button className="mt-4 bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-lg transition-transform hover:scale-105 shadow-md hover:shadow-lg">
+  <button className="mt-4 bg-teal-500 ...">
     Call to Action
   </button>
 </div>
@@ -1406,7 +1394,7 @@ export const componentCategories: ComponentCategory[] = [
         component: <BreadcrumbExample />,
         code: `
 <nav aria-label="breadcrumb">
-  <ol className="flex items-center space-x-2 text-sm text-slate-500">
+  <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-500">
     <li><a href="#" className="hover:text-teal-500">Início</a></li>
     <li><span>&gt;</span></li>
     <li><a href="#" className="hover:text-teal-500">Categoria</a></li>
@@ -1423,7 +1411,7 @@ export const componentCategories: ComponentCategory[] = [
         code: `
 const [currentPage, setCurrentPage] = useState(2);
 // ...
-<nav>
+<nav className="flex flex-wrap justify-center items-center gap-2">
   <button>Previous</button>
   {pages.map(p => (
       <button key={p} 
@@ -1445,7 +1433,7 @@ const [currentPage, setCurrentPage] = useState(2);
 const [activeTab, setActiveTab] = useState(2);
 // ...
 <div>
-  <nav>
+  <nav className="flex flex-wrap space-x-4">
     <button onClick={() => setActiveTab(1)} className={activeTab === 1 ? 'active' : ''}>Aba 1</button>
     {/* ... mais abas */}
   </nav>
@@ -1567,8 +1555,8 @@ const Sidebar = () => {
         description: "Controles, como menus suspensos ou caixas de seleção, que permitem aos usuários filtrar e ordenar listas de conteúdo.",
         component: <FilterSortExample />,
         code: `
-<div className="flex space-x-4">
-  <div>
+<div className="flex flex-col sm:flex-row gap-4">
+  <div className="flex-1">
     <label htmlFor="sort">Ordenar por</label>
     <select id="sort">
       <option>Relevância</option>
@@ -1693,11 +1681,11 @@ const Gallery = () => {
         code: `
 <div className="relative">
   {/* Linha vertical */}
-  <div className="absolute left-1/2 w-0.5 h-full bg-slate-300"></div>
+  <div className="absolute left-4 md:left-1/2 w-0.5 h-full bg-slate-300"></div>
   {/* Itens da timeline */}
   <div className="relative mb-8 ...">
-    <div className="absolute left-1/2 w-4 h-4 rounded-full bg-teal-500"></div>
-    <div>Evento 1</div>
+    <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-teal-500"></div>
+    <div className="ml-8 md:ml-0">Evento 1</div>
   </div>
 </div>`
       },
@@ -2319,20 +2307,22 @@ const [progress, setProgress] = useState(0);
             description: "Para organizar e exibir dados em linhas e colunas. Ideal para informações estruturadas de forma clara e concisa.",
             component: <TableExample />,
             code: `
-<table className="min-w-full text-sm">
-  <thead className="bg-slate-100">
-    <tr>
-      <th>Produto</th>
-      <th>Preço</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr className="border-b">
-      <td>Laptop</td>
-      <td>R$ 5.999</td>
-    </tr>
-  </tbody>
-</table>
+<div className="w-full overflow-x-auto rounded-lg border">
+  <table className="min-w-full text-sm">
+    <thead className="bg-slate-100">
+      <tr>
+        <th>Produto</th>
+        <th>Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="border-b">
+        <td>Laptop</td>
+        <td>R$ 5.999</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `
         },
         {
@@ -2347,15 +2337,17 @@ const [sortConfig, setSortConfig] = useState({ key: 'name', dir: 'asc' });
 // Lógica para filtrar e ordenar os dados...
 
 return (
-  <div>
+  <div className="w-full">
     <input placeholder="Filtrar..." onChange={...} />
-    <table>
-      <thead>
-        <th onClick={() => requestSort('name')}>Nome</th>
-        {/* ... */}
-      </thead>
-      <tbody>{/* ... dados mapeados ... */}</tbody>
-    </table>
+    <div className="mt-2 w-full overflow-x-auto rounded-lg border">
+        <table className="w-full text-sm whitespace-nowrap">
+            <thead>
+                <th onClick={() => requestSort('name')}>Nome</th>
+                {/* ... */}
+            </thead>
+            <tbody>{/* ... dados mapeados ... */}</tbody>
+        </table>
+    </div>
   </div>
 );`
         },
@@ -2466,12 +2458,13 @@ const [isOpen, setIsOpen] = useState(false);
             description: "Combina a navegação hierárquica do breadcrumb com controles de filtro, criando um contexto claro para o usuário.",
             component: <BreadcrumbFilterComboExample />,
             code: `
-<div>
+<div className="bg-white p-4 rounded-lg border">
   <nav aria-label="breadcrumb">
     <ol>...</ol>
   </nav>
-  <div className="mt-4 border-t">
+  <div className="mt-4 pt-4 border-t flex flex-col items-start sm:flex-row sm:items-center gap-4">
     <span>Filtrar por:</span>
+    <select>...</select>
     <select>...</select>
   </div>
 </div>`
