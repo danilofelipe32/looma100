@@ -54,7 +54,7 @@ const SidebarExample: React.FC = () => (
           Perfil
         </a>
         <a href="#" className="flex items-center p-2 bg-slate-900 text-white rounded-md text-sm font-semibold">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           Ajustes
         </a>
       </nav>
@@ -239,7 +239,7 @@ const ExpandableSidebarExample: React.FC = () => {
             {isExpanded && <span className="ml-3 text-sm font-medium">Painel</span>}
           </a>
           <a href="#" title="Ajustes" className={`flex items-center p-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors ${isExpanded ? '' : 'justify-center'}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
             {isExpanded && <span className="ml-3 text-sm font-medium">Ajustes</span>}
           </a>
         </nav>
@@ -579,12 +579,34 @@ const InputExample: React.FC = () => (
     </div>
 );
 
-const TextareaExample: React.FC = () => (
-    <div className="w-full max-w-xs">
-        <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-1">Mensagem</label>
-        <textarea name="message" id="message" rows={3} className="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border-slate-300 rounded-md" placeholder="Sua mensagem..."></textarea>
-    </div>
-);
+const TextareaExample: React.FC = () => {
+    const [message, setMessage] = useState('');
+    const maxLength = 200;
+
+    return (
+        <div className="w-full max-w-sm">
+            <label htmlFor="message-textarea-example" className="block text-sm font-medium text-slate-700 mb-1">
+                Sua Mensagem
+            </label>
+            <div className="relative">
+                <textarea
+                    id="message-textarea-example"
+                    name="message"
+                    rows={4}
+                    className="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border border-slate-300 rounded-md p-2 resize-y transition-colors"
+                    placeholder="Deixe um comentário..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    maxLength={maxLength}
+                    aria-describedby="char-count-example"
+                />
+                <div id="char-count-example" className={`text-right text-xs mt-1 pr-1 transition-colors ${message.length > maxLength ? 'text-red-600 font-semibold' : 'text-slate-500'}`}>
+                    <span>{message.length}</span> / <span>{maxLength}</span>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const CheckboxExample: React.FC = () => {
     const [checked, setChecked] = useState(true);
@@ -911,7 +933,7 @@ const IconExample: React.FC = () => (
         <span className="text-xs mt-1">Home</span>
       </div>
        <div className="flex flex-col items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 hover:text-teal-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 hover:text-teal-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
          <span className="text-xs mt-1">Config</span>
       </div>
        <div className="flex flex-col items-center">
@@ -1770,10 +1792,33 @@ const LoginForm = () => {
         description: "Permite a entrada de múltiplas linhas de texto, ideal para comentários, mensagens ou descrições longas.",
         component: <TextareaExample />,
         code: `
-<div>
-  <label htmlFor="message">Mensagem</label>
-  <textarea id="message" rows="3" placeholder="Sua mensagem..."></textarea>
-</div>`
+const TextareaWithCounter = () => {
+  const [message, setMessage] = useState('');
+  const maxLength = 200;
+
+  return (
+    <div className="w-full max-w-sm">
+      <label htmlFor="message-textarea" className="block text-sm font-medium text-slate-700 mb-1">
+        Sua Mensagem
+      </label>
+      <div className="relative">
+        <textarea
+          id="message-textarea"
+          rows={4}
+          className="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border border-slate-300 rounded-md p-2 resize-y"
+          placeholder="Deixe um comentário..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          maxLength={maxLength}
+          aria-describedby="char-count"
+        />
+        <div id="char-count" className="text-right text-xs text-slate-500 mt-1 pr-1">
+          <span>{message.length}</span> / <span>{maxLength}</span>
+        </div>
+      </div>
+    </div>
+  );
+};`
       },
       {
         name: "Checkbox",
