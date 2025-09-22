@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { componentCategories } from './data/componentData';
 import Header from './components/layout/Header';
@@ -107,6 +108,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, componentData }) => {
           <div>
             <h3 className="text-lg font-semibold text-slate-800 mb-2">Descrição</h3>
             <p className="text-slate-600 leading-relaxed">{componentData.description}</p>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-semibold text-slate-800 mb-2">Quando Utilizar</h3>
+             <blockquote className="border-l-4 border-teal-500 pl-4 py-2 my-2 bg-slate-50">
+                <p className="text-slate-700 italic leading-relaxed">{componentData.usage}</p>
+             </blockquote>
           </div>
 
           <div>

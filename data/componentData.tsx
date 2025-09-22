@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { ComponentCategory } from '../types';
 
@@ -1552,6 +1553,7 @@ export const componentCategories: ComponentCategory[] = [
        {
         name: "Container / Wrapper",
         description: "Delimita e centraliza o conteúdo principal, garantindo margens consistentes e legibilidade em diferentes tamanhos de tela.",
+        usage: "Use um container para estabelecer a largura máxima do seu conteúdo principal, garantindo que ele não se estenda por toda a tela em monitores grandes. É fundamental para criar layouts consistentes e legíveis em qualquer site ou aplicação.",
         component: <ContainerExample />,
         code: `
 <div className="w-full bg-slate-200 p-4 rounded-lg">
@@ -1564,6 +1566,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Section",
         description: "Divide a página em áreas temáticas ou blocos de conteúdo distintos, melhorando a organização visual e a semântica do HTML.",
+        usage: "Utilize seções para agrupar conteúdo relacionado semanticamente. Por exemplo, uma seção 'Sobre Nós', uma seção 'Nossos Serviços' e uma seção 'Contato'. Isso melhora a estrutura do HTML e a acessibilidade para leitores de tela.",
         component: <SectionExample />,
         code: `
 <section className="w-full bg-white shadow-md p-4 sm:p-6 rounded-lg border-l-4 border-teal-500">
@@ -1574,6 +1577,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Header",
         description: "A área superior da página ou de uma seção, contendo branding, título ou navegação principal. Define a identidade visual.",
+        usage: "O cabeçalho é ideal para a parte superior de cada página, contendo o logotipo do site, o menu de navegação principal e, opcionalmente, botões de ação como 'Login' ou 'Cadastre-se'.",
         component: <HeaderExample />,
         code: `
 <header className="w-full bg-white shadow-md p-4 rounded-lg flex justify-between items-center">
@@ -1587,6 +1591,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Navbar / Navigation",
         description: "Um conjunto de links que permite aos usuários navegar pelas principais seções de um site. Essencial para a usabilidade.",
+        usage: "Empregue uma barra de navegação para fornecer os links principais do seu site. Ela deve ser consistente em todas as páginas para que os usuários possam se orientar e acessar facilmente as áreas mais importantes.",
         component: <NavbarExample />,
         code: `
 <nav className="w-full bg-teal-500 p-3 rounded-lg flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
@@ -1598,6 +1603,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Sidebar",
         description: "Uma coluna vertical, geralmente à esquerda ou direita, contendo navegação secundária, filtros ou informações contextuais.",
+        usage: "Uma barra lateral é perfeita para navegação secundária, menus de painel de controle (dashboard), listas de filtros em uma página de e-commerce ou para exibir informações contextuais que não são o foco principal da página.",
         component: <SidebarExample />,
         code: `
 <div className="w-full h-auto md:h-56 flex flex-col md:flex-row rounded-lg overflow-hidden bg-white shadow-md">
@@ -1619,6 +1625,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Footer",
         description: "O rodapé da página, contendo informações como links úteis, contatos, direitos autorais e links para redes sociais.",
+        usage: "O rodapé é o local para informações que não precisam estar em destaque, mas devem ser facilmente acessíveis, como links de política de privacidade, termos de uso, mapa do site, informações de contato e direitos autorais.",
         component: <FooterExample />,
         code: `
 <footer className="w-full bg-slate-800 text-white p-4 rounded-lg text-center">
@@ -1628,6 +1635,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Grid / Flexbox Layout",
         description: "Sistemas de layout poderosos para criar arranjos responsivos e complexos. Grid é para layout 2D, Flexbox para 1D.",
+        usage: "Use Flexbox para alinhar itens em uma única dimensão (linha ou coluna), como centralizar itens em um card. Use Grid para layouts bidimensionais complexos, como galerias de imagens ou qualquer design que precise de alinhamento em linhas e colunas.",
         component: <GridFlexboxExample />,
         code: `
 <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -1642,6 +1650,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Hero Section",
         description: "Área de destaque no topo da página para capturar a atenção do usuário com uma imagem impactante e um call-to-action.",
+        usage: "A seção 'Hero' é a primeira coisa que um visitante vê. Use-a na sua página inicial para causar uma forte primeira impressão, comunicar sua proposta de valor principal e guiar o usuário para a ação mais importante (Call to Action).",
         component: <HeroExample />,
         code: `
 <div className="w-full text-center bg-slate-200 p-6 sm:p-8 rounded-lg">
@@ -1656,6 +1665,7 @@ export const componentCategories: ComponentCategory[] = [
        {
         name: "Card",
         description: "Um bloco de conteúdo autocontido, geralmente com uma imagem, título e ações, usado para exibir itens em uma coleção.",
+        usage: "Cards são ideais para exibir uma coleção de itens de conteúdo de forma organizada e repetível, como postagens de blog, produtos em uma loja, ou perfis de usuário. Cada card funciona como uma unidade de informação independente.",
         component: <CardExample />,
         code: `
 <div className="w-full max-w-xs bg-white rounded-lg shadow-md p-6 transition-transform hover:scale-105 hover:shadow-xl">
@@ -1669,6 +1679,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Divider / Separator",
         description: "Linhas ou espaços visuais para separar ou agrupar conteúdo, melhorando a clareza e a organização do layout.",
+        usage: "Use divisores para criar uma separação visual clara entre diferentes seções ou grupos de elementos. Eles ajudam a reduzir a carga cognitiva do usuário, tornando o layout mais escaneável e organizado.",
         component: <DividerExample />,
         code: `
 <div className="w-full max-w-sm space-y-4">
@@ -1693,6 +1704,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Breadcrumb",
         description: "Mostra o caminho de navegação do usuário, permitindo que ele retorne facilmente às páginas anteriores.",
+        usage: "Ideal para sites com hierarquia de páginas profunda, como e-commerce (Home > Calçados > Tênis) ou documentações. Ajuda o usuário a entender onde está e a navegar de volta para níveis superiores facilmente.",
         component: <BreadcrumbExample />,
         code: `
 <nav aria-label="breadcrumb">
@@ -1709,6 +1721,7 @@ export const componentCategories: ComponentCategory[] = [
       {
         name: "Pagination",
         description: "Divide grandes conjuntos de conteúdo em várias páginas para facilitar a navegação.",
+        usage: "Use paginação quando você tiver uma longa lista de itens (mais de 20-30), como resultados de busca ou artigos de blog. Isso melhora o desempenho e a usabilidade, evitando sobrecarregar o usuário com muitas informações.",
         component: <PaginationExample />,
         code: `
 const [currentPage, setCurrentPage] = useState(2);
@@ -1730,6 +1743,7 @@ const [currentPage, setCurrentPage] = useState(2);
       {
         name: "Tabs",
         description: "Permite alternar entre diferentes seções de conteúdo no mesmo espaço, economizando espaço na tela.",
+        usage: "Abas são perfeitas para organizar conteúdo relacionado em um espaço compacto. Use quando você tem diferentes visualizações de um mesmo item, como 'Descrição do Produto', 'Especificações Técnicas' e 'Avaliações'.",
         component: <TabsExample />,
         code: `
 const [activeTab, setActiveTab] = useState(2);
@@ -1749,6 +1763,7 @@ const [activeTab, setActiveTab] = useState(2);
       {
         name: "Accordion",
         description: "Permite que os usuários expandam e recolham seções de conteúdo. Ideal para FAQs e para economizar espaço vertical.",
+        usage: "Utilize um acordeão para seções de perguntas frequentes (FAQ), menus complexos ou qualquer conteúdo que possa ser condensado para economizar espaço vertical. Permite que o usuário foque apenas no conteúdo que lhe interessa.",
         component: <AccordionExample />,
         code: `
 const Accordion = () => {
@@ -1768,6 +1783,7 @@ const Accordion = () => {
       {
         name: "Dropdown Menu",
         description: "Um menu que aparece quando o usuário clica em um botão ou item, revelando uma lista de opções ou ações.",
+        usage: "Ótimo para listas de ações ou links que não precisam estar sempre visíveis. Comum em cabeçalhos para menus de perfil de usuário ('Minha Conta', 'Sair') ou para agrupar ações secundárias em um botão.",
         component: <DropdownExample />,
         code: `
 const Dropdown = () => {
@@ -1789,6 +1805,7 @@ const Dropdown = () => {
       {
         name: "Submenu / Mega Menu",
         description: "Navegação em camadas onde itens de menu revelam subcategorias. Mega menus são versões expandidas para muitos links.",
+        usage: "Use um submenu para menus de navegação com categorias e subcategorias. Um Mega Menu é a escolha ideal para sites grandes, como e-commerces, onde você precisa exibir muitos links e até mesmo imagens dentro do menu principal.",
         component: <SubmenuExample />,
         code: `
 <nav>
@@ -1806,6 +1823,7 @@ const Dropdown = () => {
       {
         name: "Sidebar Expandível",
         description: "Um painel de navegação lateral que pode ser expandido ou recolhido para otimizar o espaço da tela.",
+        usage: "Perfeito para painéis de administração (dashboards) e aplicações web complexas, onde o espaço na tela é valioso. Permite que o usuário maximize a área de conteúdo quando a navegação não está em uso.",
         component: <ExpandableSidebarExample />,
         code: `
 const Sidebar = () => {
@@ -1843,6 +1861,7 @@ const Sidebar = () => {
       {
         name: "Search Bar",
         description: "Um campo de entrada que permite aos usuários pesquisar conteúdo dentro do site ou aplicação.",
+        usage: "Essencial para qualquer site com muito conteúdo. Posicione-a de forma proeminente, geralmente no cabeçalho, para permitir que os usuários encontrem rapidamente o que procuram.",
         component: <SearchBarExample />,
         code: `
 <div className="relative">
@@ -1855,6 +1874,7 @@ const Sidebar = () => {
       {
         name: "Filter / Sort Controls",
         description: "Controles, como menus suspensos ou caixas de seleção, que permitem aos usuários filtrar e ordenar listas de conteúdo.",
+        usage: "Indispensável em páginas de listagem, como e-commerce ou galerias. Permite que os usuários refinem os resultados de acordo com seus critérios (preço, categoria, data, etc.), melhorando a experiência de busca.",
         component: <FilterSortExample />,
         code: `
 <div className="flex flex-col sm:flex-row gap-4">
@@ -1871,6 +1891,7 @@ const Sidebar = () => {
       {
         name: "List Group",
         description: "Exibe uma lista de itens com conteúdo variado, incluindo ícones, avatares e ações, para uma apresentação rica.",
+        usage: "Use grupos de listas para apresentar informações de forma estruturada e visualmente rica. É mais flexível que uma lista padrão (<ul>), sendo ótimo para menus de configurações, listas de contatos ou feeds de atividades.",
         component: <ListGroupExample />,
         code: `
 <div className="w-full max-w-sm bg-white rounded-lg shadow-md border">
@@ -1896,6 +1917,7 @@ const Sidebar = () => {
       {
         name: "Tree View / Nested List",
         description: "Exibe informações em uma estrutura hierárquica, permitindo que os usuários expandam e recolham ramos.",
+        usage: "Ideal para exibir estruturas hierárquicas, como sistemas de arquivos, organogramas ou estruturas de navegação aninhadas. Permite ao usuário explorar a hierarquia de forma interativa.",
         component: <TreeViewExample />,
         code: `
 const TreeNode = ({ node, level }) => {
@@ -1919,6 +1941,7 @@ const TreeNode = ({ node, level }) => {
       {
         name: "Drawer / Off-canvas",
         description: "Um painel lateral que desliza para fora da tela, usado para navegação, filtros ou conteúdo secundário.",
+        usage: "Use um Drawer para conteúdo que não é essencial para a visualização principal, mas precisa estar acessível, como menus de navegação em dispositivos móveis, carrinhos de compras ou painéis de notificação.",
         component: <DrawerExample />,
         code: `
 const Drawer = () => {
@@ -1939,6 +1962,7 @@ const Drawer = () => {
       {
         name: "Scrollable Tabs",
         description: "Uma variação de abas que permite rolagem horizontal quando o número de abas excede o espaço disponível.",
+        usage: "A solução perfeita quando você tem mais abas do que o espaço da tela permite, como em visualizações de painéis com muitas opções ou em interfaces móveis. Evita que o layout quebre e mantém a usabilidade.",
         component: <ScrollableTabsExample />,
         code: `
 <div className="relative border-b">
@@ -1959,6 +1983,7 @@ const Drawer = () => {
        {
         name: "Modal / Dialog",
         description: "Janela sobreposta para exibir informações importantes ou solicitar uma ação sem sair da página atual.",
+        usage: "Use um modal para interromper o fluxo do usuário e solicitar uma ação crítica, como uma confirmação de exclusão ('Você tem certeza?'), um formulário de login ou para exibir informações importantes sem perder o contexto da página.",
         component: <ModalExample />,
         code: `
 const Modal = () => {
@@ -1982,6 +2007,7 @@ const Modal = () => {
       {
         name: "Tooltip",
         description: "Pequena caixa de texto que aparece ao passar o mouse sobre um elemento, fornecendo informações contextuais.",
+        usage: "Perfeito para fornecer informações adicionais e concisas sobre um ícone, botão ou um termo técnico, sem poluir a interface. O usuário descobre a informação ao passar o mouse, de forma não intrusiva.",
         component: <TooltipExample />,
         code: `
 <div className="relative group">
@@ -1994,6 +2020,7 @@ const Modal = () => {
       {
         name: "Popover",
         description: "Similar a um tooltip, mas pode conter conteúdo mais rico e é geralmente acionado por um clique.",
+        usage: "Use um popover quando precisar exibir mais informações do que caberia em um tooltip, como um mini-formulário, um seletor de data ou um conjunto de ações. É acionado por clique e oferece mais interatividade.",
         component: <PopoverExample />,
         code: `
 const Popover = () => {
@@ -2014,6 +2041,7 @@ const Popover = () => {
       {
         name: "Slider / Carousel",
         description: "Componente que permite navegar por uma série de itens (imagens ou cards) de forma horizontal.",
+        usage: "Ideal para exibir uma seleção de imagens ou destaques na página inicial, galerias de produtos ou depoimentos de clientes. Economiza espaço e cria um ponto focal visualmente atraente.",
         component: <SliderExample />,
         code: `
 const Slider = () => {
@@ -2034,6 +2062,7 @@ const Slider = () => {
       {
         name: "Gallery / Lightbox",
         description: "Exibe uma grade de imagens que, ao serem clicadas, abrem em uma visualização ampliada (lightbox).",
+        usage: "Utilize em portfólios, páginas de produtos ou em qualquer lugar onde você precise exibir uma coleção de imagens. A funcionalidade de lightbox permite que os usuários vejam os detalhes de cada imagem em tela cheia.",
         component: <GalleryExample />,
         code: `
 const Gallery = () => {
@@ -2060,6 +2089,7 @@ const Gallery = () => {
       {
         name: "Timeline",
         description: "Exibe uma lista de eventos em ordem cronológica, ideal para históricos, processos ou trajetórias.",
+        usage: "Perfeito para contar uma história ou exibir eventos em ordem cronológica, como o histórico de uma empresa, o andamento de um projeto ou as atualizações de um pedido.",
         component: <TimelineExample />,
         code: `
 <div className="relative">
@@ -2075,6 +2105,7 @@ const Gallery = () => {
       {
         name: "Steps / Wizard",
         description: "Guia o usuário através de um processo com múltiplas etapas, como um cadastro ou um checkout.",
+        usage: "Use para dividir processos longos e complexos em etapas gerenciáveis. É ideal para formulários de cadastro, processos de checkout ou qualquer tarefa que exija múltiplos passos, guiando o usuário do início ao fim.",
         component: <StepsExample />,
         code: `
 const Steps = () => {
@@ -2094,6 +2125,7 @@ const Steps = () => {
       {
         name: "FAQ (Perguntas Frequentes)",
         description: "Uma lista de perguntas e respostas comuns, apresentada em formato de acordeão para economizar espaço e facilitar a leitura.",
+        usage: "Indispensável para páginas de suporte ou de produtos. Organiza as dúvidas mais comuns de forma limpa e concisa, permitindo que os usuários encontrem respostas rapidamente sem precisar contatar o suporte.",
         component: <FAQExample />,
         code: `
 const FAQ = () => {
@@ -2135,6 +2167,7 @@ const FAQ = () => {
       {
         name: "Calendar / Agenda View",
         description: "Exibe datas em uma visualização de calendário mensal, útil para agendamentos, eventos ou logs de atividades.",
+        usage: "Utilize para aplicações de agendamento, reserva de eventos, ou para exibir logs de atividades por data. Fornece uma visão clara e familiar para interagir com datas.",
         component: <CalendarViewExample />,
         code: `
 const Calendar = () => {
@@ -2169,6 +2202,7 @@ const Calendar = () => {
       {
         name: "Form",
         description: "A estrutura que agrupa campos de entrada, botões e outros elementos para coletar e enviar dados do usuário.",
+        usage: "Sempre que precisar coletar dados do usuário, seja para um simples formulário de contato, um cadastro complexo ou um processo de checkout. O formulário é a base da interação do usuário com a aplicação.",
         component: <FormExample />,
         code: `
 const LoginForm = () => {
@@ -2243,6 +2277,7 @@ const LoginForm = () => {
       {
         name: "Input",
         description: "Campo para entrada de texto, números, e-mails, senhas, etc. O elemento de formulário mais fundamental.",
+        usage: "O bloco de construção mais básico de qualquer formulário. Use para coletar informações curtas como nome, e-mail ou senha. Adapte o `type` (text, email, password, number) para melhorar a usabilidade e validação.",
         component: <InputExample />,
         code: `
 <div className="w-full max-w-xs">
@@ -2270,6 +2305,7 @@ const LoginForm = () => {
        {
         name: "Textarea",
         description: "Permite a entrada de múltiplas linhas de texto, ideal para comentários, mensagens ou descrições longas.",
+        usage: "Ideal para quando você precisa que o usuário insira um texto mais longo e de múltiplas linhas, como um campo de comentários, uma descrição detalhada ou o corpo de uma mensagem.",
         component: <TextareaExample />,
         code: `
 const TextareaWithCounter = () => {
@@ -2303,6 +2339,7 @@ const TextareaWithCounter = () => {
       {
         name: "Checkbox",
         description: "Permite que o usuário selecione uma ou mais opções de um conjunto. Ideal para listas de preferências ou consentimento.",
+        usage: "Use quando o usuário pode selecionar zero, uma ou várias opções de uma lista. Perfeito para aceitar termos de serviço, escolher interesses ou selecionar vários itens para uma ação.",
         component: <CheckboxExample />,
         code: `
 const [checked, setChecked] = useState(true);
@@ -2315,6 +2352,7 @@ const [checked, setChecked] = useState(true);
       {
         name: "Radio Button",
         description: "Permite ao usuário escolher apenas uma opção de uma lista mutuamente exclusiva. Usado para seleções únicas.",
+        usage: "Utilize quando o usuário deve escolher *apenas uma* opção de uma lista. Exemplos comuns incluem selecionar um método de envio, um tipo de plano ou responder a uma pergunta com resposta única.",
         component: <RadioButtonExample />,
         code: `
 const [selection, setSelection] = useState('option1');
@@ -2327,6 +2365,7 @@ const [selection, setSelection] = useState('option1');
       {
         name: "Select / Combobox",
         description: "Um menu suspenso que oferece uma lista de opções para o usuário escolher. Economiza espaço na tela.",
+        usage: "Ideal para listas de opções longas, onde mostrar todos os itens como Radio Buttons ocuparia muito espaço. Comum para selecionar um país, estado ou uma categoria de uma lista predefinida.",
         component: <SelectExample />,
         code: `
 <div>
@@ -2340,6 +2379,7 @@ const [selection, setSelection] = useState('option1');
       {
         name: "Switch / Toggle",
         description: "Um controle visual para ligar ou desligar uma opção. Oferece uma alternativa moderna ao checkbox.",
+        usage: "Use para representar estados binários (ligado/desligado), como ativar notificações ou alternar entre tema claro/escuro. É uma alternativa mais visual e moderna ao checkbox para essa finalidade.",
         component: <SwitchToggleExample />,
         code: `
 const [enabled, setEnabled] = useState(false);
@@ -2351,6 +2391,7 @@ const [enabled, setEnabled] = useState(false);
       {
         name: "Range Slider",
         description: "Permite ao usuário selecionar um valor dentro de um intervalo definido, arrastando um controle deslizante.",
+        usage: "Perfeito para selecionar um valor aproximado dentro de um intervalo, onde a precisão exata não é crucial. Ótimo para filtros de preço, configurações de volume ou brilho.",
         component: <RangeSliderExample />,
         code: `
 const [value, setValue] = useState(50);
@@ -2363,6 +2404,7 @@ const [value, setValue] = useState(50);
       {
         name: "Date / Time Picker",
         description: "Um seletor que permite ao usuário escolher uma data a partir de um calendário e um horário com campos dedicados, incluindo um seletor AM/PM.",
+        usage: "Indispensável para qualquer campo que exija a entrada de uma data ou hora. Evita erros de formatação e oferece uma experiência de usuário muito superior a um campo de texto simples.",
         component: <DateTimePickerExample />,
         code: `
 const DateTimePicker = () => {
@@ -2405,6 +2447,7 @@ const DateTimePicker = () => {
       {
         name: "File Upload / Drag & Drop",
         description: "Permite que os usuários selecionem e enviem arquivos do seu dispositivo, com uma área para arrastar e soltar.",
+        usage: "Utilize sempre que o usuário precisar enviar um arquivo, como uma foto de perfil ou um documento. A área de 'arrastar e soltar' melhora a usabilidade em desktops.",
         component: <FileUploadExample />,
         code: `
 <div>
@@ -2418,6 +2461,7 @@ const DateTimePicker = () => {
       {
         name: "Captcha / reCAPTCHA",
         description: "Um teste para verificar se o usuário é humano, protegendo formulários contra spam e bots.",
+        usage: "Use em formulários públicos e importantes, como login, cadastro e contato, para proteger sua aplicação contra spam e ataques automatizados de bots.",
         component: <CaptchaExample />,
         code: `
 <div>
@@ -2429,6 +2473,7 @@ const DateTimePicker = () => {
       {
           name: "Submit / Reset Button",
           description: "Botões para enviar (submit) os dados do formulário ou para limpar (reset) todos os campos para seus valores iniciais.",
+          usage: "Botões essenciais em qualquer formulário. O botão 'Submit' finaliza a entrada de dados, enquanto o 'Reset' (usado com menos frequência) oferece uma maneira rápida de limpar todos os campos.",
           component: <SubmitResetButtonExample />,
           code: `
 <div className="flex space-x-4">
@@ -2443,6 +2488,7 @@ const DateTimePicker = () => {
       {
         name: "Autocomplete / Typeahead",
         description: "Um campo de texto que sugere opções em tempo real com base no que o usuário digita, facilitando a entrada de dados.",
+        usage: "Melhora muito a experiência de preenchimento de formulários, especialmente em campos com muitas opções possíveis, como busca de cidades ou produtos. Reduz o esforço do usuário e evita erros de digitação.",
         component: <AutoCompleteExample />,
         code: `
 const AutoComplete = () => {
@@ -2471,6 +2517,7 @@ const AutoComplete = () => {
       {
         name: "Date Range Picker",
         description: "Permite que os usuários selecionem um intervalo de datas (início e fim) de forma visual e intuitiva.",
+        usage: "Ideal para sistemas de reserva, painéis de análise de dados ou qualquer interface onde o usuário precise definir um período de tempo com data de início e fim.",
         component: <DateRangePickerExample />,
         code: `
 const DateRange = () => {
@@ -2494,6 +2541,7 @@ const DateRange = () => {
       {
         name: "Rating / Stars",
         description: "Componente para avaliações visuais, geralmente com estrelas, permitindo que os usuários deem uma nota.",
+        usage: "Use em sistemas de avaliação de produtos, serviços, artigos ou qualquer item que possa receber uma nota do usuário. Fornece um feedback visual imediato e é universalmente compreendido.",
         component: <RatingExample />,
         code: `
 const Rating = () => {
@@ -2526,6 +2574,7 @@ const Rating = () => {
       {
         name: "Alert",
         description: "Mensagem contextual que fornece feedback sobre uma ação, como sucesso, erro, aviso ou informação.",
+        usage: "Use alertas para comunicar informações importantes que requerem a atenção do usuário. Sucesso (verde) após uma ação, Erro (vermelho) quando algo falha, e Aviso (amarelo) para informações importantes.",
         component: <AlertExample />,
         code: `
 <div className="bg-green-100 border-green-400 text-green-700 px-4 py-3 rounded" role="alert">
@@ -2537,6 +2586,7 @@ const Rating = () => {
       {
         name: "Toast / Snackbar",
         description: "Notificação temporária e discreta que aparece na tela para informar o usuário sobre um processo.",
+        usage: "Perfeito para feedback não-intrusivo. Use para confirmar ações secundárias como 'Item salvo' ou 'E-mail enviado', sem interromper o que o usuário está fazendo.",
         component: <ToastExample />,
         code: `
 const [show, setShow] = useState(false);
@@ -2556,6 +2606,7 @@ return (
       {
         name: "Badge",
         description: "Pequenos contadores ou indicadores visuais usados para destacar informações, como o número de notificações.",
+        usage: "Utilize badges para chamar a atenção para um item de forma discreta, como o número de e-mails não lidos, notificações pendentes ou para rotular um item como 'Novo' ou 'Em Promoção'.",
         component: <BadgeExample />,
         code: `
 <div className="flex items-center">
@@ -2568,6 +2619,7 @@ return (
       {
         name: "Loading Spinner",
         description: "Animação que indica que um processo está em andamento, mantendo o usuário informado.",
+        usage: "Use quando uma ação leva um tempo perceptível para ser concluída (mais de 300ms), como carregar dados da rede. Informa ao usuário que o sistema está trabalhando e não travou.",
         component: (
           <div className="w-8 h-8 border-4 border-slate-200 border-t-teal-500 rounded-full animate-spin"></div>
         ),
@@ -2576,6 +2628,7 @@ return (
       {
         name: "Skeleton Loader",
         description: "Um placeholder visual que imita a estrutura da interface enquanto o conteúdo real está sendo carregado.",
+        usage: "Ideal para carregar conteúdo em cards ou listas. Ele melhora a percepção de performance, mostrando uma pré-visualização da estrutura do layout antes que os dados cheguem, tornando a espera menos frustrante.",
         component: <SkeletonLoaderExample />,
         code: `
 <div className="animate-pulse flex space-x-4">
@@ -2589,6 +2642,7 @@ return (
       {
         name: "Progress Bar",
         description: "Indica o progresso de uma tarefa que leva tempo para ser concluída, como um upload ou um processo de várias etapas.",
+        usage: "Use para tarefas de longa duração onde o progresso pode ser medido, como upload de um arquivo grande ou um processo de várias etapas. Gerencia a expectativa do usuário sobre o tempo de espera.",
         component: <ProgressBarExample />,
         code: `
 const [progress, setProgress] = useState(0);
@@ -2601,6 +2655,7 @@ const [progress, setProgress] = useState(0);
       {
         name: "Empty State",
         description: "Uma tela exibida quando não há conteúdo para mostrar, orientando o usuário sobre como proceder.",
+        usage: "Crucial para uma boa experiência do usuário. Use quando uma lista ou busca não tem conteúdo. Em vez de uma tela em branco, guie o usuário com uma mensagem clara e uma ação para ele começar (ex: 'Crie seu primeiro projeto').",
         component: <EmptyStateExample />,
         code: `
 <div className="text-center p-6 bg-slate-100 rounded-lg">
@@ -2622,6 +2677,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Heading (h1-h6)",
             description: "Títulos hierárquicos para estruturar o conteúdo. A tag <h1> é a mais importante e a <h6>, a menos.",
+            usage: "Use títulos para criar uma hierarquia visual e semântica clara. H1 para o título principal da página (apenas um), H2 para seções, H3 para subseções, etc. Isso é crucial para SEO e acessibilidade.",
             component: <HeadingsExample />,
             code: `
 <div>
@@ -2637,6 +2693,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Paragraph (p)",
             description: "O elemento fundamental para exibir blocos de texto. Essencial para a legibilidade e o corpo do conteúdo.",
+            usage: "O elemento principal para todo o texto de corpo. Use-o para blocos de texto, descrições e qualquer conteúdo escrito que não seja um título. Garanta que a altura da linha e o espaçamento sejam adequados.",
             component: <ParagraphExample />,
             code: `
 <p className="text-slate-600 leading-relaxed">
@@ -2647,6 +2704,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Lists (ul, ol, dl)",
             description: "Usadas para agrupar itens relacionados: 'ul' para listas não ordenadas, 'ol' para ordenadas e 'dl' para definições.",
+            usage: "Use `<ul>` para listas onde a ordem não importa (ex: recursos). Use `<ol>` para listas onde a ordem é crucial (ex: um passo a passo). Use `<dl>` para glossários ou para associar termos a suas definições.",
             component: <ListsExample />,
             code: `
 <div>
@@ -2671,6 +2729,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Blockquote",
             description: "Para destacar citações ou trechos de texto de outras fontes, geralmente com uma estilização distinta.",
+            usage: "Ideal para destacar citações de pessoas, trechos de outros artigos ou depoimentos de clientes. O recuo e a estilização visual separam claramente a citação do resto do conteúdo.",
             component: <BlockquoteExample />,
             code: `
 <blockquote className="border-l-4 border-teal-500 pl-4 italic">
@@ -2682,6 +2741,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Code Block / Inline Code",
             description: "Para exibir trechos de código. Use <code> para trechos curtos em linha e <pre><code> para blocos maiores.",
+            usage: "Use `<code>` em linha para referenciar nomes de variáveis ou arquivos dentro de um parágrafo. Use `<pre>` para exibir blocos de código maiores, preservando a formatação, espaços e quebras de linha.",
             component: <CodeExample />,
             code: `
 <div>
@@ -2708,6 +2768,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Image",
             description: "Utilizado para exibir imagens estáticas. Essencial para o apelo visual e para ilustrar conteúdo.",
+            usage: "Essencial para quebrar blocos de texto, ilustrar conceitos e tornar a interface mais atraente. Sempre forneça um atributo `alt` descritivo para acessibilidade e SEO.",
             component: <ImageExample />,
             code: `
 <figure>
@@ -2723,6 +2784,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Video / Audio Player",
             description: "Incorpora players de mídia para reprodução de vídeo e áudio diretamente na página, usando as tags nativas do HTML.",
+            usage: "Use para incorporar conteúdo multimídia diretamente. Vídeos são ótimos para tutoriais e demonstrações de produtos. Áudio é ideal para podcasts ou amostras de música.",
             component: <MediaPlayerExample />,
             code: `
 <div>
@@ -2740,6 +2802,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Iframe / Embed",
             description: "Permite incorporar conteúdo de outras fontes, como mapas, vídeos do YouTube ou posts de redes sociais.",
+            usage: "A maneira mais fácil de incluir conteúdo de terceiros, como vídeos do YouTube, mapas ou posts de redes sociais. Use com moderação, pois pode impactar o desempenho da página.",
             component: <IframeExample />,
             code: `
 <div className="aspect-video">
@@ -2755,6 +2818,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Icon",
             description: "Ícones vetoriais (SVG) para ações e informações. São escaláveis, personalizáveis e de carregamento rápido.",
+            usage: "Use ícones para reforçar o significado de ações e informações, economizando espaço. Eles são universalmente compreendidos e melhoram a escaneabilidade da interface. Prefira SVGs por sua escalabilidade.",
             component: <IconExample />,
             code: `
 <div>
@@ -2768,6 +2832,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Avatar",
             description: "Uma imagem circular para representar usuários ou perfis, frequentemente com indicadores de status.",
+            usage: "Ideal para representar usuários em listas, comentários e perfis. Um avatar torna a interface mais humana e pessoal. O indicador de status é útil para aplicações de comunicação.",
             component: <AvatarExample />,
             code: `
 <div className="relative">
@@ -2791,6 +2856,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Table",
             description: "Para organizar e exibir dados em linhas e colunas. Ideal para informações estruturadas de forma clara e concisa.",
+            usage: "A melhor escolha para exibir dados tabulares densos, como planilhas, relatórios financeiros ou listas de especificações. Priorize a clareza e a legibilidade.",
             component: <TableExample />,
             code: `
 <div className="w-full overflow-x-auto rounded-lg border">
@@ -2814,6 +2880,7 @@ const [progress, setProgress] = useState(0);
         {
             name: "Data Grid",
             description: "Uma tabela avançada com funcionalidades interativas, como ordenação de colunas e filtragem de dados em tempo real.",
+            usage: "Use quando sua tabela precisa de funcionalidades de uma aplicação, como ordenação, filtragem e paginação. É um componente essencial para painéis de administração e aplicações de gerenciamento de dados.",
             component: <DataGridExample />,
             code: `
 // Requer estado para filtro e ordenação
@@ -2840,6 +2907,7 @@ return (
         {
             name: "Charts / Graphs",
             description: "Visualização de dados através de gráficos (barras, linhas, pizza) para facilitar a compreensão de informações complexas.",
+            usage: "Indispensável para dashboards e relatórios. Transforme números e dados brutos em insights visuais fáceis de entender. Escolha o tipo de gráfico (barras, linha, pizza) que melhor representa seus dados.",
             component: <ChartExample />,
             code: `
 const data = [
@@ -2878,6 +2946,7 @@ return (
         {
             name: "Map (Google Maps / Leaflet)",
             description: "Incorpora mapas interativos para exibir localizações geográficas, rotas ou pontos de interesse.",
+            usage: "Use sempre que precisar mostrar uma localização física, como o endereço de uma loja, a área de cobertura de um serviço ou para rastrear uma entrega. A interatividade do mapa melhora muito a experiência.",
             component: <MapExample />,
             code: `
 <div className="w-full aspect-square">
@@ -2892,6 +2961,7 @@ return (
         {
             name: "Chat Widget",
             description: "Um widget flutuante, geralmente para suporte ao cliente ou chatbot, que abre uma janela de conversação.",
+            usage: "Ideal para sites de e-commerce e SaaS para oferecer suporte ao cliente em tempo real. Permite que os usuários tirem dúvidas sem sair da página, o que pode aumentar as conversões.",
             component: <ChatWidgetExample />,
             code: `
 const [isOpen, setIsOpen] = useState(false);
@@ -2908,6 +2978,7 @@ const [isOpen, setIsOpen] = useState(false);
         {
             name: "Notification Center",
             description: "Um painel, geralmente acionado por um ícone de sino, que agrega e exibe notificações e alertas para o usuário.",
+            usage: "Use em aplicações onde os usuários recebem atualizações frequentes, como redes sociais ou ferramentas de gerenciamento de projetos. Agrega todas as novidades em um único local de fácil acesso.",
             component: <NotificationCenterExample />,
             code: `
 const [isOpen, setIsOpen] = useState(false);
@@ -2928,6 +2999,7 @@ const [isOpen, setIsOpen] = useState(false);
         {
             name: "Tag / Chip / Pill",
             description: "Marcadores compactos para categorizar ou rotular itens, como posts de blog, produtos ou filtros de pesquisa.",
+            usage: "Perfeito para adicionar metadados a itens. Use para categorizar artigos de blog, mostrar tecnologias em um projeto, ou como filtros selecionados em uma busca.",
             component: <TagExample />,
             code: `
 <div className="flex gap-2">
@@ -2942,6 +3014,7 @@ const [isOpen, setIsOpen] = useState(false);
         {
             name: "Breadcrumb + Filter Combo",
             description: "Combina a navegação hierárquica do breadcrumb com controles de filtro, criando um contexto claro para o usuário.",
+            usage: "Uma combinação poderosa para páginas de listagem complexas em e-commerce. O breadcrumb mostra a categoria, enquanto os filtros permitem ao usuário refinar os resultados dentro daquela categoria.",
             component: <BreadcrumbFilterComboExample />,
             code: `
 <div className="bg-white p-4 rounded-lg border">
