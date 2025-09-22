@@ -3,6 +3,8 @@ import { componentCategories } from './data/componentData';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import ComponentCard from './components/ui/ComponentCard';
+import { ComponentInfo } from './types';
+import CodeBlock from './components/ui/CodeBlock';
 
 const AnimateOnScroll: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -45,9 +47,102 @@ const AnimateOnScroll: React.FC<{ children: React.ReactNode }> = ({ children }) 
   );
 };
 
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  componentData: ComponentInfo | null;
+}
+
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, componentData }) => {
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
+
+  if (!isOpen || !componentData) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-300 animate-fade-in"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div
+        className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden transform animate-scale-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <header className="flex justify-between items-center p-4 border-b border-slate-200 flex-shrink-0">
+          <h2 id="modal-title" className="text-xl font-bold text-slate-900">
+            {componentData.name}
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-slate-500 hover:text-slate-800 transition-colors rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            aria-label="Fechar modal"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </header>
+
+        <main className="p-6 overflow-y-auto space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold text-slate-800 mb-2">Demonstração</h3>
+            <div className="bg-slate-100 rounded-lg p-6 min-h-[150px] flex justify-center items-center">
+              {componentData.component}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-slate-800 mb-2">Descrição</h3>
+            <p className="text-slate-600 leading-relaxed">{componentData.description}</p>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-slate-800 mb-2">Código de Exemplo</h3>
+            <CodeBlock code={componentData.code} />
+          </div>
+        </main>
+      </div>
+       <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scale-in {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        .animate-fade-in { animation: fade-in 0.2s ease-out forwards; }
+        .animate-scale-in { animation: scale-in 0.2s ease-out forwards; }
+      `}</style>
+    </div>
+  );
+};
+
 
 const App: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('Todas as Categorias');
+  const [modalComponent, setModalComponent] = useState<ComponentInfo | null>(null);
+
+  const handleViewDetails = (component: ComponentInfo) => {
+    setModalComponent(component);
+  };
+
+  const handleCloseModal = () => {
+    setModalComponent(null);
+  };
   
   const allCategoryTitles = ['Todas as Categorias', ...componentCategories.map(cat => cat.title)];
 
@@ -106,6 +201,7 @@ const App: React.FC = () => {
                   name={component.name}
                   description={component.description}
                   code={component.code}
+                  onViewDetails={() => handleViewDetails(component)}
                 >
                   {component.component}
                 </ComponentCard>
@@ -114,6 +210,11 @@ const App: React.FC = () => {
           </section>
         ))}
       </main>
+      <Modal 
+        isOpen={!!modalComponent}
+        onClose={handleCloseModal}
+        componentData={modalComponent}
+      />
       <Footer />
     </div>
   );
