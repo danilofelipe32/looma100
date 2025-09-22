@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { componentCategories } from './data/componentData';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -143,6 +142,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, componentData }) => {
 const App: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('Todas as Categorias');
   const [modalComponent, setModalComponent] = useState<ComponentInfo | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleViewDetails = (component: ComponentInfo) => {
     setModalComponent(component);
@@ -153,10 +153,27 @@ const App: React.FC = () => {
   };
   
   const allCategoryTitles = ['Todas as Categorias', ...componentCategories.map(cat => cat.title)];
+  
+  const finalCategories = useMemo(() => {
+    const categoriesToShow = activeFilter === 'Todas as Categorias'
+        ? componentCategories
+        : componentCategories.filter(cat => cat.title === activeFilter);
 
-  const filteredCategories = activeFilter === 'Todas as Categorias'
-    ? componentCategories
-    : componentCategories.filter(cat => cat.title === activeFilter);
+    if (!searchQuery) {
+        return categoriesToShow;
+    }
+
+    return categoriesToShow.map(category => {
+        const filteredComponents = category.components.filter(component =>
+            component.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            component.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            component.usage.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        return { ...category, components: filteredComponents };
+    }).filter(category => category.components.length > 0);
+
+  }, [activeFilter, searchQuery]);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-sky-100 text-slate-800">
@@ -172,26 +189,48 @@ const App: React.FC = () => {
             </p>
           </div>
         </AnimateOnScroll>
+        
+        <div className="mb-12 space-y-8">
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto">
+            <label htmlFor="search-components" className="sr-only">Buscar componentes</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none" aria-hidden="true">
+                <svg className="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <input
+                type="search"
+                id="search-components"
+                placeholder="Buscar componentes por nome, descrição ou uso..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="block w-full pl-11 pr-4 py-3 border border-slate-300 rounded-full text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent shadow-sm transition"
+              />
+            </div>
+          </div>
 
-        {/* Filter Pills */}
-        <div className="mb-12 flex flex-wrap justify-center gap-2 md:gap-3">
-          {allCategoryTitles.map((categoryTitle) => (
-            <button
-              key={categoryTitle}
-              onClick={() => setActiveFilter(categoryTitle)}
-              className={`px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ${
-                activeFilter === categoryTitle
-                  ? 'bg-teal-500 text-white hover:bg-teal-600'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-              }`}
-              aria-pressed={activeFilter === categoryTitle}
-            >
-              {categoryTitle}
-            </button>
-          ))}
+          {/* Filter Pills */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+            {allCategoryTitles.map((categoryTitle) => (
+              <button
+                key={categoryTitle}
+                onClick={() => setActiveFilter(categoryTitle)}
+                className={`px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ${
+                  activeFilter === categoryTitle
+                    ? 'bg-teal-500 text-white hover:bg-teal-600'
+                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                }`}
+                aria-pressed={activeFilter === categoryTitle}
+              >
+                {categoryTitle}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {filteredCategories.map((category) => (
+        {finalCategories.map((category) => (
           <section key={category.title} className="mb-16" id={category.title.replace(/\s+/g, '-')}>
             <AnimateOnScroll>
               <div className="mb-8">
@@ -217,6 +256,20 @@ const App: React.FC = () => {
             </div>
           </section>
         ))}
+
+        {finalCategories.length === 0 && searchQuery && (
+          <div className="text-center py-16">
+            <div className="mx-auto h-12 w-12 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+            <h3 className="mt-4 text-lg font-semibold text-slate-900">Nenhum componente encontrado</h3>
+            <p className="mt-1 text-slate-500">
+                Sua busca por <span className="font-semibold text-slate-800">"{searchQuery}"</span> não retornou resultados. Tente outros termos.
+            </p>
+          </div>
+        )}
       </main>
       <Modal 
         isOpen={!!modalComponent}
