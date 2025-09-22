@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import CodeBlock from './CodeBlock';
 
 interface ComponentCardProps {
@@ -12,6 +12,34 @@ interface ComponentCardProps {
 const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, children }) => {
   const [isCodeVisible, setIsCodeVisible] = useState(false);
   const [copyButtonText, setCopyButtonText] = useState('Copiar');
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1, 
+      }
+    );
+
+    const currentRef = cardRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
+
 
   const handleCopy = () => {
     if (navigator.clipboard) {
@@ -27,7 +55,12 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
+    <div 
+      ref={cardRef}
+      className={`bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-1 flex flex-col ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
       <div className="p-6">
         <h3 className="text-xl font-bold text-slate-900 mb-2">{name}</h3>
         <p className="text-slate-600 mb-4 text-sm leading-relaxed">{description}</p>
