@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import CodeBlock from './CodeBlock';
 
@@ -58,7 +57,7 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
   return (
     <div 
       ref={cardRef}
-      className={`bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-black/20 overflow-hidden transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-1 flex flex-col ${
+      className={`bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-black/20 border border-slate-200/80 dark:border-slate-700/60 overflow-hidden transition-all duration-500 ease-in-out hover:shadow-xl dark:hover:shadow-teal-500/10 hover:-translate-y-1 flex flex-col ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
@@ -69,7 +68,7 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
           {children}
         </div>
       </div>
-      <div className="mt-auto bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700 px-6 py-3 flex justify-between items-center">
+      <div className="mt-auto bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-700 px-6 py-3 flex justify-between items-center">
         <button
           onClick={onViewDetails}
           title="Ver detalhes"
