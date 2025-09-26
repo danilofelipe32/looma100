@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { ComponentCategory } from '../types';
 
@@ -67,7 +66,7 @@ const SidebarExample: React.FC = () => (
 );
 
 const FooterExample: React.FC = () => (
-  <footer className="w-full bg-slate-800 text-white p-4 rounded-lg text-center">
+  <footer className="w-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 p-4 rounded-lg text-center">
     <p className="text-sm">&copy; 2024 Meu Site. Todos os direitos reservados.</p>
   </footer>
 );
@@ -823,12 +822,12 @@ const ToastExample: React.FC = () => {
     };
 
     return (
-        <div className="relative w-full h-24">
+        <div className="relative w-full h-24 flex items-center justify-center">
             <button onClick={handleShowToast} className="bg-teal-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-teal-600 transition-colors">
                 Exibir Toast
             </button>
             {showToast && (
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-sm py-2 px-4 rounded-md shadow-lg transition-opacity duration-300 animate-fade-in-up">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm py-2 px-4 rounded-md shadow-lg border border-slate-200 dark:border-slate-700 transition-opacity duration-300 animate-fade-in-up">
                     Notificação temporária!
                 </div>
             )}
@@ -986,7 +985,7 @@ const ImageExample: React.FC = () => (
 );
 
 const MediaPlayerExample: React.FC = () => (
-    <div className="w-full max-w-sm space-y-4">
+    <div className="w-full max-w-sm space-y-4 bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
       <video className="w-full rounded-lg shadow-md" controls poster="https://placehold.co/400x225/334155/ffffff?text=Video+Poster">
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
@@ -1628,7 +1627,7 @@ export const componentCategories: ComponentCategory[] = [
         usage: "O rodapé é o local para informações que não precisam estar em destaque, mas devem ser facilmente acessíveis, como links de política de privacidade, termos de uso, mapa do site, informações de contato e direitos autorais.",
         component: <FooterExample />,
         code: `
-<footer className="w-full bg-slate-800 text-white p-4 rounded-lg text-center">
+<footer className="w-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 p-4 rounded-lg text-center">
   <p className="text-sm">&copy; 2024 Meu Site. Todos os direitos reservados.</p>
 </footer>`
       },
@@ -2527,7 +2526,7 @@ const Toast = () => {
     <>
       <button onClick={triggerToast} className="bg-teal-500 ...">Exibir Toast</button>
       {showToast && (
-        <div className="fixed bottom-4 right-4 bg-slate-800 text-white ...">
+        <div className="fixed bottom-4 right-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-white ...">
           Notificação temporária!
         </div>
       )}
@@ -2711,7 +2710,7 @@ const ProgressBar = () => {
         usage: "Utilize para incorporar tutoriais em vídeo, demonstrações de produtos, podcasts ou qualquer conteúdo de mídia. O atributo `controls` fornece a interface padrão do navegador para o usuário interagir.",
         component: <MediaPlayerExample />,
         code: `
-<div className="space-y-4">
+<div className="w-full max-w-sm space-y-4 bg-slate-200 dark:bg-slate-800 p-4 rounded-lg">
   <video className="w-full rounded-lg shadow-md" controls poster="caminho/para/poster.jpg">
     <source src="caminho/para/video.mp4" type="video/mp4" />
     Seu navegador não suporta a tag de vídeo.
