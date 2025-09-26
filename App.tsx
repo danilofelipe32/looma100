@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { componentCategories } from './data/componentData';
 import Header from './components/layout/Header';
@@ -71,23 +72,23 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, componentData }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-300 animate-fade-in"
+      className="fixed inset-0 bg-black/60 dark:bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-opacity duration-300 animate-fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       <div
-        className="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden transform animate-scale-in"
+        className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col overflow-hidden transform animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="flex justify-between items-center p-4 border-b border-slate-200 flex-shrink-0">
-          <h2 id="modal-title" className="text-xl font-bold text-slate-900">
+        <header className="flex justify-between items-center p-4 border-b border-slate-200 dark:border-slate-700 flex-shrink-0">
+          <h2 id="modal-title" className="text-xl font-bold text-slate-900 dark:text-slate-50">
             {componentData.name}
           </h2>
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-slate-800 transition-colors rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-teal-500"
             aria-label="Fechar modal"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -98,26 +99,26 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, componentData }) => {
 
         <main className="p-6 overflow-y-auto space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-slate-800 mb-2">Demonstração</h3>
-            <div className="bg-slate-100 rounded-lg p-6 min-h-[150px] flex justify-center items-center">
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Demonstração</h3>
+            <div className="bg-slate-100 dark:bg-slate-900 rounded-lg p-6 min-h-[150px] flex justify-center items-center">
               {componentData.component}
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-slate-800 mb-2">Descrição</h3>
-            <p className="text-slate-600 leading-relaxed">{componentData.description}</p>
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Descrição</h3>
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{componentData.description}</p>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold text-slate-800 mb-2">Quando Utilizar</h3>
-             <blockquote className="border-l-4 border-teal-500 pl-4 py-2 my-2 bg-slate-50">
-                <p className="text-slate-700 italic leading-relaxed">{componentData.usage}</p>
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Quando Utilizar</h3>
+             <blockquote className="border-l-4 border-teal-500 pl-4 py-2 my-2 bg-slate-50 dark:bg-slate-900/50">
+                <p className="text-slate-700 dark:text-slate-300 italic leading-relaxed">{componentData.usage}</p>
              </blockquote>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-slate-800 mb-2">Código de Exemplo</h3>
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">Código de Exemplo</h3>
             <CodeBlock code={componentData.code} />
           </div>
         </main>
@@ -176,15 +177,15 @@ const App: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-sky-100 text-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-sky-100 dark:from-slate-900 dark:via-slate-800 dark:to-gray-900 text-slate-800 dark:text-slate-200">
       <Header />
       <main className="container mx-auto px-4 py-12 md:px-8">
         <AnimateOnScroll>
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
               Componentes Essenciais da Web
             </h1>
-            <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-600">
+            <p className="mt-4 max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-400">
               Uma exploração dos blocos fundamentais de UI/UX que compõem as interfaces web modernas.
             </p>
           </div>
@@ -196,7 +197,7 @@ const App: React.FC = () => {
             <label htmlFor="search-components" className="sr-only">Buscar componentes</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none" aria-hidden="true">
-                <svg className="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 text-slate-400 dark:text-slate-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                 </svg>
               </div>
@@ -206,7 +207,7 @@ const App: React.FC = () => {
                 placeholder="Buscar componentes por nome, descrição ou uso..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="block w-full pl-11 pr-4 py-3 border border-slate-300 rounded-full text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent shadow-sm transition"
+                className="block w-full pl-11 pr-4 py-3 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-full text-slate-900 dark:text-slate-50 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent shadow-sm transition"
               />
             </div>
           </div>
@@ -220,7 +221,7 @@ const App: React.FC = () => {
                 className={`px-4 py-2 text-sm font-semibold rounded-full shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ${
                   activeFilter === categoryTitle
                     ? 'bg-teal-500 text-white hover:bg-teal-600'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
                 }`}
                 aria-pressed={activeFilter === categoryTitle}
               >
@@ -234,11 +235,11 @@ const App: React.FC = () => {
           <section key={category.title} className="mb-16" id={category.title.replace(/\s+/g, '-')}>
             <AnimateOnScroll>
               <div className="mb-8">
-                 <h2 className="text-3xl font-bold text-slate-900 mb-3 border-b-2 border-teal-500 pb-2 inline-flex items-center gap-3">
+                 <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-3 border-b-2 border-teal-500 pb-2 inline-flex items-center gap-3">
                   <span>{category.icon}</span>
                   {category.title}
                 </h2>
-                <p className="text-slate-600 max-w-4xl">{category.description}</p>
+                <p className="text-slate-600 dark:text-slate-400 max-w-4xl">{category.description}</p>
               </div>
             </AnimateOnScroll>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -259,14 +260,14 @@ const App: React.FC = () => {
 
         {finalCategories.length === 0 && searchQuery && (
           <div className="text-center py-16">
-            <div className="mx-auto h-12 w-12 text-slate-400">
+            <div className="mx-auto h-12 w-12 text-slate-400 dark:text-slate-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-slate-900">Nenhum componente encontrado</h3>
-            <p className="mt-1 text-slate-500">
-                Sua busca por <span className="font-semibold text-slate-800">"{searchQuery}"</span> não retornou resultados. Tente outros termos.
+            <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-slate-50">Nenhum componente encontrado</h3>
+            <p className="mt-1 text-slate-500 dark:text-slate-400">
+                Sua busca por <span className="font-semibold text-slate-800 dark:text-slate-200">"{searchQuery}"</span> não retornou resultados. Tente outros termos.
             </p>
           </div>
         )}

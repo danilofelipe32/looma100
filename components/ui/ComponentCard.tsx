@@ -58,22 +58,22 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
   return (
     <div 
       ref={cardRef}
-      className={`bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-1 flex flex-col ${
+      className={`bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-black/20 overflow-hidden transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-1 flex flex-col ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
     >
       <div className="p-6">
-        <h3 className="text-xl font-bold text-slate-900 mb-2">{name}</h3>
-        <p className="text-slate-600 mb-4 text-sm leading-relaxed">{description}</p>
-        <div className="bg-slate-100 rounded-lg p-6 min-h-[150px] flex justify-center items-center">
+        <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50 mb-2">{name}</h3>
+        <p className="text-slate-600 dark:text-slate-400 mb-4 text-sm leading-relaxed">{description}</p>
+        <div className="bg-slate-100 dark:bg-slate-900 rounded-lg p-6 min-h-[150px] flex justify-center items-center">
           {children}
         </div>
       </div>
-      <div className="mt-auto bg-slate-50 border-t border-slate-200 px-6 py-3 flex justify-between items-center">
+      <div className="mt-auto bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700 px-6 py-3 flex justify-between items-center">
         <button
           onClick={onViewDetails}
           title="Ver detalhes"
-          className="p-2 rounded-full text-slate-600 hover:bg-slate-200 hover:text-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-50 focus:ring-teal-500"
+          className="p-2 rounded-full text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-teal-500 dark:hover:text-teal-400 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-50 dark:focus:ring-offset-slate-800 focus:ring-teal-500"
           aria-label={`Ver detalhes de ${name}`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -85,7 +85,7 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
         <div className="flex items-center space-x-4">
           <button
             onClick={handleCopy}
-            className="flex items-center space-x-2 text-sm font-semibold text-slate-700 hover:text-teal-500 transition-colors"
+            className="flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -94,7 +94,7 @@ const ComponentCard: React.FC<ComponentCardProps> = ({ name, description, code, 
           </button>
           <button
             onClick={() => setIsCodeVisible(!isCodeVisible)}
-            className="flex items-center space-x-2 text-sm font-semibold text-slate-700 hover:text-teal-500 transition-colors"
+            className="flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
           >
             <span>Ver Código</span>
             <svg
