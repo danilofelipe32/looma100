@@ -560,6 +560,152 @@ const FormExample: React.FC = () => {
   );
 };
 
+const InteractiveFormExample: React.FC = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+
+    const validate = () => {
+        const newErrors: { [key: string]: string } = {};
+        if (!formData.name) {
+            newErrors.name = 'O nome é obrigatório.';
+        }
+        if (!formData.email) {
+            newErrors.email = 'O email é obrigatório.';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'O formato do email é inválido.';
+        }
+        if (!formData.message) {
+            newErrors.message = 'A mensagem é obrigatória.';
+        } else if (formData.message.length < 10) {
+            newErrors.message = 'A mensagem deve ter pelo menos 10 caracteres.';
+        }
+        return newErrors;
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (Object.keys(errors).length > 0) {
+            setErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors[name];
+                return newErrors;
+            });
+        }
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const validationErrors = validate();
+        setErrors(validationErrors);
+        setSubmitStatus(null);
+
+        if (Object.keys(validationErrors).length === 0) {
+            setIsSubmitting(true);
+            setTimeout(() => {
+                const isSuccess = Math.random() > 0.2; 
+                if (isSuccess) {
+                    setSubmitStatus('success');
+                    setFormData({ name: '', email: '', message: '' });
+                } else {
+                    setSubmitStatus('error');
+                }
+                setIsSubmitting(false);
+            }, 1500);
+        }
+    };
+    
+    const getBorderColor = (field: keyof typeof formData) => {
+      if (errors[field]) return 'border-red-500 focus:border-red-500 focus:ring-red-500';
+      if (submitStatus === 'success' || (Object.keys(errors).length > 0 && !errors[field] && formData[field])) return 'border-green-500 focus:border-green-500 focus:ring-green-500';
+      return 'border-slate-300 dark:border-slate-600 focus:border-teal-500 focus:ring-teal-500';
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 space-y-4" noValidate>
+            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 text-center">Fale Conosco</h3>
+            
+            {submitStatus === 'success' && (
+                <div className="bg-green-100 dark:bg-green-900/30 border border-green-400 text-green-700 dark:text-green-300 px-4 py-2 rounded-md text-sm">
+                    Mensagem enviada com sucesso!
+                </div>
+            )}
+            {submitStatus === 'error' && (
+                <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 text-red-700 dark:text-red-300 px-4 py-2 rounded-md text-sm">
+                    Ocorreu um erro ao enviar. Tente novamente.
+                </div>
+            )}
+
+            <div>
+                <label htmlFor="interactive-form-name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Nome
+                </label>
+                <input
+                    type="text"
+                    id="interactive-form-name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 focus:outline-none focus:ring-1 transition-colors ${getBorderColor('name')}`}
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
+                />
+                {errors.name && <p id="name-error" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.name}</p>}
+            </div>
+
+            <div>
+                <label htmlFor="interactive-form-email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    id="interactive-form-email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 focus:outline-none focus:ring-1 transition-colors ${getBorderColor('email')}`}
+                    aria-invalid={!!errors.email}
+                     aria-describedby={errors.email ? 'email-error' : undefined}
+                />
+                {errors.email && <p id="email-error" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.email}</p>}
+            </div>
+
+            <div>
+                <label htmlFor="interactive-form-message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                    Mensagem
+                </label>
+                <textarea
+                    id="interactive-form-message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={`block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50 focus:outline-none focus:ring-1 resize-y transition-colors ${getBorderColor('message')}`}
+                    aria-invalid={!!errors.message}
+                     aria-describedby={errors.message ? 'message-error' : undefined}
+                />
+                {errors.message && <p id="message-error" className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.message}</p>}
+            </div>
+
+            <button type="submit" disabled={isSubmitting} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-500 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:bg-slate-400 dark:disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors">
+                {isSubmitting ? (
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                ) : 'Enviar'}
+            </button>
+        </form>
+    );
+};
+
+
 const InputExample: React.FC = () => (
     <div className="w-full max-w-xs">
         <label htmlFor="input-component-email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email</label>
@@ -2198,6 +2344,70 @@ const LoginForm = () => {
        {/* ... Mais campos com estilos para dark mode */}
     </form>
   );
+};`
+      },
+      {
+        name: "Formulário Interativo com Validação",
+        description: "Um exemplo de formulário com validação de campos, feedback de estado (carregando, sucesso, erro) e uma experiência de usuário aprimorada.",
+        usage: "Use formulários interativos sempre que a coleta de dados for crítica. A validação do lado do cliente melhora a UX ao fornecer feedback imediato, reduzindo erros e requisições desnecessárias ao servidor. O feedback de estado (loading, success, error) gerencia as expectativas do usuário durante o envio.",
+        component: <InteractiveFormExample />,
+        code: `
+const InteractiveForm = () => {
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null);
+
+    const validate = () => {
+        const newErrors = {};
+        if (!formData.name) newErrors.name = 'O nome é obrigatório.';
+        if (!formData.email) {
+            newErrors.email = 'O email é obrigatório.';
+        } else if (!/\\S+@\\S+\\.\\S+/.test(formData.email)) {
+            newErrors.email = 'O formato do email é inválido.';
+        }
+        if (!formData.message || formData.message.length < 10) {
+            newErrors.message = 'A mensagem deve ter pelo menos 10 caracteres.';
+        }
+        return newErrors;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const validationErrors = validate();
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length === 0) {
+            setIsSubmitting(true);
+            setTimeout(() => { // Simula API
+                const isSuccess = Math.random() > 0.2; 
+                setSubmitStatus(isSuccess ? 'success' : 'error');
+                if (isSuccess) setFormData({ name: '', email: '', message: '' });
+                setIsSubmitting(false);
+            }, 1500);
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit} noValidate>
+            {submitStatus === 'success' && <div>Sucesso!</div>}
+            {submitStatus === 'error' && <div>Erro!</div>}
+            
+            <div>
+                <label>Nome</label>
+                <input
+                    type="text"
+                    name="name"
+                    className={errors.name ? 'border-red-500' : ''}
+                />
+                {errors.name && <p>{errors.name}</p>}
+            </div>
+            
+            <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Enviando...' : 'Enviar'}
+            </button>
+        </form>
+    );
 };`
       },
       {
