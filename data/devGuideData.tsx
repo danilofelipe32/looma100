@@ -405,6 +405,103 @@ const TiposDeErrosComponent: React.FC = () => {
     );
 };
 
+const AnatomyOfAnErrorComponent: React.FC = () => {
+  const CodeHighlight: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <code className="font-mono text-sm text-orange-600 dark:text-orange-400 bg-orange-100/50 dark:bg-orange-900/20 px-1 py-0.5 rounded-sm">
+      {children}
+    </code>
+  );
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+        Dissecando a Mensagem de Erro
+      </h2>
+      
+      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+        Uma mensagem de erro pode parecer assustadora, mas é na verdade um mapa para a solução. Vamos quebrar um exemplo comum para entender as pistas que ele nos dá.
+      </p>
+
+      <div className="bg-slate-100 dark:bg-slate-900 p-4 rounded-lg font-mono text-xs text-red-600 dark:text-red-400 overflow-x-auto space-y-1">
+        <p>Uncaught TypeError: Cannot read properties of null (reading 'name')</p>
+        <p className="text-slate-500 dark:text-slate-500"><span className="text-slate-400 dark:text-slate-600">at</span> UserProfile (<span className="text-teal-600 dark:text-teal-400">UserProfile.tsx:10:25</span>)</p>
+        <p className="text-slate-500 dark:text-slate-500"><span className="text-slate-400 dark:text-slate-600">at</span> renderWithHooks (react-dom.development.js:14985:18)</p>
+        <p className="text-slate-500 dark:text-slate-500"><span className="text-slate-400 dark:text-slate-600">at</span> mountIndeterminateComponent (react-dom.development.js:17800:13)</p>
+      </div>
+
+      <div className="space-y-4">
+        {/* Section 1 */}
+        <div className="p-4 rounded-md border-l-4 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+            1. Tipo do Erro: <CodeHighlight>Uncaught TypeError</CodeHighlight>
+          </h3>
+          <dl className="space-y-2 text-sm">
+            <dt className="font-semibold text-slate-700 dark:text-slate-300">O que é:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Indica a categoria do erro. <CodeHighlight>TypeError</CodeHighlight> significa que uma operação foi tentada em um valor do tipo errado. Outros comuns são <CodeHighlight>ReferenceError</CodeHighlight> (variável não existe) e <CodeHighlight>SyntaxError</CodeHighlight>.
+            </dd>
+            <dt className="font-semibold text-slate-700 dark:text-slate-300 mt-2">Como usar:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              O tipo já te dá uma grande pista. É um <CodeHighlight>TypeError</CodeHighlight>? Procure por <CodeHighlight>null</CodeHighlight> ou <CodeHighlight>undefined</CodeHighlight> onde um objeto era esperado.
+            </dd>
+          </dl>
+        </div>
+
+        {/* Section 2 */}
+        <div className="p-4 rounded-md border-l-4 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+            2. Mensagem: <CodeHighlight>Cannot read properties of null (reading 'name')</CodeHighlight>
+          </h3>
+          <dl className="space-y-2 text-sm">
+            <dt className="font-semibold text-slate-700 dark:text-slate-300">O que é:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              A descrição do que deu errado. É a parte mais importante. Aqui, o JavaScript está dizendo: "Você tentou ler a propriedade <CodeHighlight>name</CodeHighlight> de algo que é <CodeHighlight>null</CodeHighlight>."
+            </dd>
+            <dt className="font-semibold text-slate-700 dark:text-slate-300 mt-2">Como usar:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Leia com atenção. A mensagem é literal. O código fez <CodeHighlight>alguma_coisa.name</CodeHighlight>, mas <CodeHighlight>alguma_coisa</CodeHighlight> era <CodeHighlight>null</CodeHighlight> naquele momento.
+            </dd>
+          </dl>
+        </div>
+
+        {/* Section 3 */}
+        <div className="p-4 rounded-md border-l-4 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+            3. Localização: <CodeHighlight>at UserProfile (UserProfile.tsx:10:25)</CodeHighlight>
+          </h3>
+          <dl className="space-y-2 text-sm">
+            <dt className="font-semibold text-slate-700 dark:text-slate-300">O que é:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              O início do "Stack Trace" (pilha de chamadas). Mostra exatamente onde o erro ocorreu.
+            </dd>
+            <dt className="font-semibold text-slate-700 dark:text-slate-300 mt-2">Como usar:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Esta é sua linha de partida. Vá direto para o arquivo <CodeHighlight>UserProfile.tsx</CodeHighlight>, na linha 10, coluna 25. É ali que a tentativa de ler <CodeHighlight>.name</CodeHighlight> aconteceu.
+            </dd>
+          </dl>
+        </div>
+
+        {/* Section 4 */}
+        <div className="p-4 rounded-md border-l-4 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/20">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+            4. Stack Trace (Pilha de Chamadas)
+          </h3>
+          <dl className="space-y-2 text-sm">
+            <dt className="font-semibold text-slate-700 dark:text-slate-300">O que é:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              As linhas abaixo da primeira mostram a sequência de chamadas de função que levaram ao erro, de cima para baixo (do mais recente para o mais antigo).
+            </dd>
+            <dt className="font-semibold text-slate-700 dark:text-slate-300 mt-2">Como usar:</dt>
+            <dd className="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Se a primeira linha não for no seu código (pode ser dentro do React, por exemplo), desça na pilha até encontrar um arquivo que você escreveu. Isso te ajuda a entender o contexto: a função <CodeHighlight>UserProfile</CodeHighlight> foi chamada por <CodeHighlight>renderWithHooks</CodeHighlight>, que foi chamada por <CodeHighlight>mountIndeterminateComponent</CodeHighlight>, e assim por diante.
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 export const devGuideTopics: DevGuideTopic[] = [
   {
@@ -547,7 +644,18 @@ export const devGuideTopics: DevGuideTopic[] = [
               <div>
                 <h4 className="font-semibold text-slate-800 dark:text-slate-200">Debugger do Navegador (A Lupa)</h4>
                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                  Para "pausar o tempo", o desenvolvedor adiciona um <strong>breakpoint</strong> (um ponto de parada) em uma linha de código específica através do DevTools. Quando o programa chega nessa linha, ele congela, permitindo inspecionar tudo em câmera lenta.
+                  Esta é a ferramenta mais poderosa. Dentro da aba <strong>"Sources"</strong> das Ferramentas de Desenvolvedor, o programador pode adicionar um <strong>breakpoint</strong> (um ponto de parada) clicando no número de uma linha de código.
+                </p>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-2">
+                    Quando o programa executa e chega nessa linha, ele <strong>congela</strong>. Com o tempo pausado, o desenvolvedor pode:
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 text-sm mt-2">
+                    <li><strong>Inspecionar variáveis:</strong> Ver o valor exato de todas as variáveis naquele momento.</li>
+                    <li><strong>Executar passo a passo:</strong> Avançar o código linha por linha para ver como os valores mudam.</li>
+                    <li><strong>Analisar a "pilha de chamadas":</strong> Entender qual caminho o código percorreu para chegar até ali.</li>
+                </ul>
+                 <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-2">
+                    É a forma mais precisa de encontrar a origem exata de um problema de lógica.
                 </p>
                 <AiPromptBox promptText="Pausei meu código com um breakpoint, como mostra a imagem em anexo. Analise os valores das variáveis na seção 'Scope' e o 'Call Stack' para me ajudar a entender por que o programa está se comportando de forma inesperada neste ponto." />
               </div>
@@ -565,19 +673,7 @@ export const devGuideTopics: DevGuideTopic[] = [
   {
     title: 'Anatomia de um Erro',
     slug: 'anatomia-de-um-erro',
-    content: (
-      <div className="space-y-4">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Desvendando a Mensagem de Erro</h2>
-        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-          Uma mensagem de erro pode parecer assustadora, mas é na verdade um bilhete com pistas valiosas deixadas pelo "criminoso". Geralmente, ela nos diz três coisas:
-        </p>
-        <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400">
-            <li><strong>O Tipo do Problema:</strong> Uma etiqueta que diz que tipo de erro aconteceu (ex: "Erro de Gramática", "Objeto Perdido").</li>
-            <li><strong>A Mensagem:</strong> Uma frase curta explicando o que deu errado (ex: "Não consegui encontrar a informação que você pediu").</li>
-            <li><strong>O "GPS" do Erro:</strong> Um mapa que mostra o caminho exato dentro dos arquivos de código, apontando a linha exata onde o problema ocorreu. Isso ajuda o desenvolvedor a ir direto ao ponto.</li>
-        </ul>
-      </div>
-    ),
+    content: <AnatomyOfAnErrorComponent />,
   },
   {
     title: 'Boas Práticas',
