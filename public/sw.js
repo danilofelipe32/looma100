@@ -1,4 +1,3 @@
-
 const CACHE_NAME = 'web-components-cache-v1';
 // Adiciona todos os arquivos locais da aplicação ao cache do app shell
 const APP_SHELL_URLS = [
@@ -11,6 +10,9 @@ const APP_SHELL_URLS = [
   '/index.tsx',
   '/App.tsx',
   '/data/componentData.tsx',
+  '/data/devGuideData.tsx',
+  '/pages/ComponentLibrary.tsx',
+  '/pages/DeveloperGuide.tsx',
   '/components/layout/Header.tsx',
   '/components/layout/Footer.tsx',
   '/components/ui/ComponentCard.tsx',
@@ -24,10 +26,15 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Service Worker: Caching App Shell');
-        return cache.addAll(APP_SHELL_URLS);
+        // Usamos addAll para garantir que a instalação falhe se qualquer um dos arquivos falhar
+        return cache.addAll(APP_SHELL_URLS).catch(error => {
+          console.error('Service Worker: Falha ao armazenar um dos URLs do app shell:', error);
+          // Lança o erro para fazer a instalação do service worker falhar
+          throw error;
+        });
       })
       .catch(error => {
-        console.error('Service Worker: Falha ao armazenar o app shell em cache', error);
+        console.error('Service Worker: Falha ao abrir o cache', error);
       })
   );
 });
@@ -46,13 +53,25 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// Evento de fetch: estratégia Cache-first
+// Evento de fetch: estratégia Cache-first para o app shell, Network-first para o resto
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+
+  // Se a requisição for para um dos nossos arquivos do app shell, use a estratégia Cache-first
+  if (APP_SHELL_URLS.includes(url.pathname)) {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        return response || fetch(event.request);
+      })
+    );
+    return;
+  }
+  
+  // Para outras requisições (ex: APIs de terceiros, imagens não cacheadas),
+  // use uma estratégia de fallback para a rede, com cache opcional.
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Se tivermos uma resposta em cache, a retornamos.
-        // Caso contrário, buscamos na rede.
         return response || fetch(event.request).then((fetchResponse) => {
           // Validação básica da resposta da rede
           if (!fetchResponse || fetchResponse.status !== 200 || (fetchResponse.type !== 'basic' && fetchResponse.type !== 'cors')) {
