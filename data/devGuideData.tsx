@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 interface DevGuideTopic {
@@ -142,6 +141,34 @@ const ErrorDetailsModal: React.FC<{
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
       `}</style>
+    </div>
+  );
+};
+
+const AiPromptBox: React.FC<{ promptText: string }> = ({ promptText }) => {
+  const [copyButtonText, setCopyButtonText] = useState('Copiar');
+  
+  const handleCopy = () => {
+    navigator.clipboard.writeText(promptText.trim()).then(() => {
+        setCopyButtonText('Copiado!');
+        setTimeout(() => setCopyButtonText('Copiar'), 2000);
+      });
+  };
+
+  return (
+    <div className="bg-teal-50 dark:bg-teal-900/20 p-4 rounded-lg border-l-4 border-teal-500 space-y-2 mt-4">
+        <h5 className="font-semibold text-teal-800 dark:text-teal-300">Como usar com o Google AI Studio</h5>
+        <div className="bg-slate-100 dark:bg-slate-900 rounded-md p-3 relative">
+            <p className="text-sm text-slate-700 dark:text-slate-300 font-mono text-xs select-all pr-16">
+                {promptText}
+            </p>
+            <button
+                onClick={handleCopy}
+                className="absolute top-2 right-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 text-xs font-semibold px-2 py-1 rounded-md transition-colors"
+            >
+                {copyButtonText}
+            </button>
+        </div>
     </div>
   );
 };
@@ -480,14 +507,58 @@ export const devGuideTopics: DevGuideTopic[] = [
     title: 'Debugging',
     slug: 'debugging',
     content: (
-      <div className="space-y-4">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">O Que é "Debugar"?</h2>
-        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-          Imagine que você é um detetive e um crime (o "bug") aconteceu. <strong>"Debugar"</strong> (ou depurar) é o processo de investigar a cena, procurar pistas e encontrar o culpado para resolver o problema.
-        </p>
-        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-          Em vez de uma lupa, os desenvolvedores usam ferramentas especiais para olhar "dentro" do código enquanto ele está funcionando. Eles podem pausar tudo em um momento exato para ver o que cada peça está fazendo e encontrar a pista que leva à solução.
-        </p>
+       <div className="space-y-6">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Estratégias para Corrigir Erros</h2>
+          <p className="mt-2 max-w-3xl mx-auto text-slate-600 dark:text-slate-400">
+            Resolver problemas (ou "debugar") é como ser um detetive de código. Aqui estão algumas dicas e ferramentas para encontrar as pistas e solucionar os mistérios.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+          <div className="bg-slate-100/50 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 space-y-4">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">Lendo as Pistas</h3>
+            <div className="space-y-3">
+              <div>
+                <h4 className="font-semibold text-slate-800 dark:text-slate-200">Leia a Mensagem de Erro</h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Toda mensagem de erro é uma pista valiosa. Leia com atenção, pois ela sempre diz <strong>o que</strong> deu errado e <strong>onde</strong> o problema aconteceu no código.</p>
+                <AiPromptBox promptText="Estou com o erro que aparece na imagem em anexo. Por favor, traduza esta mensagem de erro para uma linguagem simples, me diga qual é a causa provável e sugira um código de correção." />
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 dark:text-slate-200">Isolando o Culpado</h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  Para "desligar" partes do código, o desenvolvedor usa uma técnica chamada <strong>comentário</strong>. Adicionando caracteres especiais (como <code>//</code>), ele diz ao computador para ignorar certas linhas.
+                </p>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-2">
+                  É como desligar os disjuntores de uma casa um por um. Se o erro some ao comentar um trecho, o "culpado" está ali.
+                </p>
+                 <AiPromptBox promptText="O bloco de código abaixo está causando um erro no meu aplicativo. Analise-o, identifique o problema e forneça o código corrigido. O erro desaparece quando eu comento este trecho: [COLE SEU CÓDIGO PROBLEMÁTICO AQUI]" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-100/50 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700 space-y-4">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">Ferramentas do Detetive</h3>
+             <div className="space-y-3">
+              <div>
+                <h4 className="font-semibold text-slate-800 dark:text-slate-200"><code className="font-mono">console.log()</code></h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">A ferramenta mais simples e útil. É como deixar bilhetes no código para ver o que está acontecendo em cada etapa.</p>
+                <AiPromptBox promptText="Neste trecho de código, adicionei um `console.log()` para inspecionar uma variável. O resultado no console é o que está na imagem anexa. Com base no código e no resultado, por que a variável tem esse valor e como posso corrigir o problema? Código: [COLE SEU CÓDIGO AQUI]" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 dark:text-slate-200">Debugger do Navegador (A Lupa)</h4>
+                 <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  Para "pausar o tempo", o desenvolvedor adiciona um <strong>breakpoint</strong> (um ponto de parada) em uma linha de código específica através do DevTools. Quando o programa chega nessa linha, ele congela, permitindo inspecionar tudo em câmera lenta.
+                </p>
+                <AiPromptBox promptText="Pausei meu código com um breakpoint, como mostra a imagem em anexo. Analise os valores das variáveis na seção 'Scope' e o 'Call Stack' para me ajudar a entender por que o programa está se comportando de forma inesperada neste ponto." />
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-800 dark:text-slate-200">React DevTools</h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Uma ferramenta especial para sites feitos em React. Ela mostra um "raio-x" de como todas as partes do site estão conectadas.</p>
+                 <AiPromptBox promptText="A imagem anexa mostra o React DevTools para um componente que não está funcionando. Analise os 'props' e o 'state' deste componente e me diga por que ele pode estar renderizando incorretamente." />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     ),
   },
